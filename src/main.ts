@@ -1,5 +1,6 @@
 import {Plugin} from 'obsidian';
 import {DEFAULT_SETTINGS, MyPluginSettings, SampleSettingTab} from "./settings";
+import { extractCodeBlockContent } from 'utils';
 
 // Remember to rename these classes and interfaces!
 
@@ -14,7 +15,20 @@ export default class MyPlugin extends Plugin {
 			id: 'run-test',
 			name: 'Run test',
 			callback: async () => {
-				console.log('HI')
+				const files = this.app.vault.getMarkdownFiles();
+				await Promise.all(files.map(async (file) => {
+					const meta = this.app.metadataCache.getFileCache(file);
+					const codeSections = meta?.sections?.filter((section) => section.type === 'code');
+
+					if (codeSections != null && codeSections.length > 0) {
+						const content = await this.app.vault.read(file);
+						codeSections.forEach((section) => {
+							const codeBlock = extractCodeBlockContent(content, section.position);
+
+							console.log(`File: ${file.path}, Language: ${codeBlock.type}, Content: ${codeBlock.content}`);
+						});
+					}
+				}));
 			}
 		});
 
