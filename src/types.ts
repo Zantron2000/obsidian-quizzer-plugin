@@ -5,11 +5,11 @@ export interface MultipleChoiceData {
 	choices: string[];
 }
 
-export interface htmlRenderData {
-	tag: keyof HTMLElementTagNameMap;
+export interface HtmlRenderData {
+	tag: keyof HTMLElementTagNameMap | keyof SVGElementTagNameMap;
 	text?: string;
 	class?: string;
-	children: htmlRenderData[];
+	children: HtmlRenderData[];
 	attrs?: {
 		[key: string]: string | number | boolean | null;
 	};

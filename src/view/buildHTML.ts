@@ -1,12 +1,37 @@
-import { htmlRenderData } from "types";
+import { HtmlRenderData } from "types";
 
-const buildHTML = (el: HTMLElement, data: htmlRenderData[]) => {
+const buildHTML = (el: HTMLElement | SVGElement, data: HtmlRenderData[]) => {
+	const svgTags = new Set<keyof SVGElementTagNameMap>([
+		"svg",
+		"path",
+		"circle",
+		"rect",
+		"ellipse",
+		"line",
+		"polyline",
+		"polygon",
+		"g",
+		"defs",
+		"use",
+		"symbol",
+	]);
+
 	data.forEach((item) => {
-		const childEl = el.createEl(item.tag, {
-			text: item.text,
-			cls: item.class,
-			attr: item.attrs,
-		});
+		let childEl: HTMLElement | SVGElement;
+
+		if (!svgTags.has(item.tag as keyof SVGElementTagNameMap)) {
+			childEl = el.createEl(item.tag as keyof HTMLElementTagNameMap, {
+				text: item.text,
+				cls: item.class,
+				attr: item.attrs,
+			});
+		} else {
+			childEl = el.createSvg(item.tag as keyof SVGElementTagNameMap, {
+				attr: item.attrs,
+			});
+
+			childEl.setAttribute("class", item.class || "");
+		}
 
 		if (item.children.length > 0) {
 			buildHTML(childEl, item.children);
