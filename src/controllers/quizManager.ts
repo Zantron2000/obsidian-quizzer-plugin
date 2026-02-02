@@ -56,7 +56,7 @@ export class QuizManager {
 							],
 						},
 						{
-							tag: "h1",
+							tag: "p",
 							class: "text-3xl mb-2 text-gray-900",
 							text: "Multiple Choice Quiz",
 							children: [],
@@ -119,10 +119,61 @@ export class QuizManager {
 									class: "flex items-center justify-center gap-1 mb-1",
 									children: [
 										{
-											tag: "div",
+											tag: "svg",
 											class: "w-5 h-5 text-yellow-500",
-											text: "[Trophy Icon]",
-											children: [],
+											attrs: {
+												xmlns: "http://www.w3.org/2000/svg",
+												width: "24",
+												height: "24",
+												viewBox: "0 0 24 24",
+												fill: "none",
+												stroke: "currentColor",
+												"stroke-width": "2",
+												"stroke-linecap": "round",
+												"stroke-linejoin": "round",
+											},
+											children: [
+												{
+													tag: "path",
+													attrs: {
+														d: "M10 14.66v1.626a2 2 0 0 1-.976 1.696A5 5 0 0 0 7 21.978",
+													},
+													children: [],
+												},
+												{
+													tag: "path",
+													attrs: {
+														d: "M14 14.66v1.626a2 2 0 0 0 .976 1.696A5 5 0 0 1 17 21.978",
+													},
+													children: [],
+												},
+												{
+													tag: "path",
+													attrs: {
+														d: "M18 9h1.5a1 1 0 0 0 0-5H18",
+													},
+													children: [],
+												},
+												{
+													tag: "path",
+													attrs: { d: "M4 22h16" },
+													children: [],
+												},
+												{
+													tag: "path",
+													attrs: {
+														d: "M6 9a6 6 0 0 0 12 0V3a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1z",
+													},
+													children: [],
+												},
+												{
+													tag: "path",
+													attrs: {
+														d: "M6 9H4.5a1 1 0 0 1 0-5H6",
+													},
+													children: [],
+												},
+											],
 										},
 										{
 											tag: "div",
@@ -148,7 +199,7 @@ export class QuizManager {
 					class: "bg-blue-50 border border-blue-200 rounded-lg p-4 mb-8",
 					children: [
 						{
-							tag: "h3",
+							tag: "p",
 							class: "text-sm mb-2 text-gray-900",
 							text: "Instructions:",
 							children: [],
@@ -179,7 +230,7 @@ export class QuizManager {
 				// Start Button
 				{
 					tag: "button",
-					class: "w-full bg-accent hover:bg-accent-dark text-white py-4 rounded-lg flex items-center justify-center gap-2 transition-colors",
+					class: "w-full bg-accent hover:bg-accent-dark text-white py-8 rounded-lg flex items-center justify-center gap-2 transition-colors",
 					children: [
 						{
 							tag: "svg",

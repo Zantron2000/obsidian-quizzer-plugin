@@ -161,6 +161,11 @@
 	padding-bottom: 1rem;
 }
 
+.py-8 {
+	padding-top: 2rem;
+	padding-bottom: 2rem;
+}
+
 /* margin bottom styles */
 .mb-1 {
 	margin-bottom: 0.25rem;
@@ -204,4 +209,9 @@
 /* grid columns */
 .grid-cols-3 {
 	grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+/* text align styles */
+.text-center {
+	text-align: center;
 }
