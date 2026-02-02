@@ -1,5 +1,4 @@
-/* eslint-disable obsidianmd/ui/sentence-case */
-import { htmlRenderData } from "types";
+import { HtmlRenderData } from "types";
 import MCManager from "./mcManager";
 import buildHTML from "view/buildHTML";
 
@@ -7,7 +6,7 @@ export class QuizManager {
 	questionManagers: MCManager[] = [];
 	errors: string[] = [];
 	questionIndex: number = 0;
-	htmlContent: htmlRenderData[] = [
+	htmlContent: HtmlRenderData[] = [
 		{
 			tag: "div",
 			class: "bg-white rounded-lg shadow-lg p-8 border border-gray-200",
@@ -26,10 +25,31 @@ export class QuizManager {
 									class: "w-16 h-16 bg-accent-light rounded-full flex items-center justify-center",
 									children: [
 										{
-											tag: "div",
+											tag: "svg",
 											class: "w-8 h-8 text-accent",
-											text: "[BookOpen Icon]",
-											children: [],
+											attrs: {
+												xmlns: "http://www.w3.org/2000/svg",
+												viewBox: "0 0 24 24",
+												fill: "none",
+												stroke: "currentColor",
+												"stroke-width": "2",
+												"stroke-linecap": "round",
+												"stroke-linejoin": "round",
+											},
+											children: [
+												{
+													tag: "path",
+													attrs: { d: "M12 7v14" },
+													children: [],
+												},
+												{
+													tag: "path",
+													attrs: {
+														d: "M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z",
+													},
+													children: [],
+												},
+											],
 										},
 									],
 								},
@@ -139,17 +159,17 @@ export class QuizManager {
 							children: [
 								{
 									tag: "li",
-									text: "• Select the best answer for each question",
+									text: "Select the best answer for each question",
 									children: [],
 								},
 								{
 									tag: "li",
-									text: "• You can navigate between questions freely",
+									text: "You can navigate between questions freely",
 									children: [],
 								},
 								{
 									tag: "li",
-									text: "• Submit your answers when you're ready",
+									text: "Submit your answers when you're ready",
 									children: [],
 								},
 							],
@@ -162,10 +182,26 @@ export class QuizManager {
 					class: "w-full bg-accent hover:bg-accent-dark text-white py-4 rounded-lg flex items-center justify-center gap-2 transition-colors",
 					children: [
 						{
-							tag: "div",
-							class: "w-5 h-5",
-							text: "[Play Icon]",
-							children: [],
+							tag: "svg",
+							class: "w-4 h-4",
+							attrs: {
+								xmlns: "http://www.w3.org/2000/svg",
+								viewBox: "0 0 24 24",
+								fill: "none",
+								stroke: "currentColor",
+								"stroke-width": "2",
+								"stroke-linecap": "round",
+								"stroke-linejoin": "round",
+							},
+							children: [
+								{
+									tag: "path",
+									attrs: {
+										d: "M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z",
+									},
+									children: [],
+								},
+							],
 						},
 						{
 							tag: "span",
