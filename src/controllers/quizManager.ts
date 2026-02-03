@@ -255,7 +255,7 @@ export class QuizManager {
 			// Start Button
 			{
 				tag: "button",
-				class: "w-full bg-accent hover:bg-accent-dark text-white py-8 rounded-lg flex items-center justify-center gap-2 transition-colors",
+				class: "w-full bg-accent hover:bg-accent-dark text-white hover:text-white py-4 rounded-lg flex items-center justify-center gap-2 clickable-icon transition-colors",
 				children: [
 					{
 						tag: "svg",
