@@ -6,6 +6,7 @@ export class QuizManager {
 	questionManagers: MCManager[] = [];
 	errors: string[] = [];
 	questionIndex: number = 0;
+	showStartMenu: boolean = true;
 	htmlContainer: HtmlRenderData = {
 		tag: "div",
 		class: "bg-white rounded-lg shadow-lg p-8 border border-gray-200",
@@ -255,7 +256,8 @@ export class QuizManager {
 			// Start Button
 			{
 				tag: "button",
-				class: "w-full bg-accent hover:bg-accent-dark text-white hover:text-white py-4 rounded-lg flex items-center justify-center gap-2 clickable-icon transition-colors",
+				class: "cursor-pointer w-full bg-accent hover:bg-accent-dark text-white hover:text-white py-4 rounded-lg flex items-center justify-center gap-2 clickable-icon transition-colors",
+				clickHandler: () => console.log(this),
 				children: [
 					{
 						tag: "svg",
@@ -302,7 +304,7 @@ export class QuizManager {
 			this.errors.forEach((error) => {
 				container.createEl("div", { text: `- ${error}` });
 			});
-		} else {
+		} else if (this.showStartMenu) {
 			buildHTML(container, this.#buildStartMenu());
 		}
 	}

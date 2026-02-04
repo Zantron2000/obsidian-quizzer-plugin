@@ -33,6 +33,14 @@ const buildHTML = (el: HTMLElement | SVGElement, data: HtmlRenderData[]) => {
 			childEl.setAttribute("class", item.class || "");
 		}
 
+		if (item.id) {
+			childEl.id = item.id;
+		}
+
+		if (item.clickHandler) {
+			childEl.addEventListener("click", item.clickHandler);
+		}
+
 		if (item.children.length > 0) {
 			buildHTML(childEl, item.children);
 		}
