@@ -25,8 +25,8 @@ export default class QuizzerPlugin extends Plugin {
 					return;
 				}
 
-				const quizManager = new QuizManager(quizData);
-				quizManager.render(el);
+				const quizManager = new QuizManager(quizData, el);
+				quizManager.render();
 			},
 		);
 

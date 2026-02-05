@@ -2,7 +2,7 @@ export interface MultipleChoiceData {
 	type: string;
 	question: string;
 	answer: string;
-	choices: string[];
+	alternatives: string[];
 }
 
 export interface HtmlRenderData {
