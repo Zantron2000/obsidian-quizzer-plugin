@@ -1,10 +1,14 @@
-import { MultipleChoiceData } from "types";
+import { HtmlRenderData, MultipleChoiceData } from "types";
+import buildHTML from "view/buildHTML";
 
 export default class MCManager {
 	static MULTIPLE_CHOICE_TYPES = ["multiple-choice", "mc"];
 	isValid: boolean;
 	errors: string[] = [];
 	data: MultipleChoiceData;
+	submitted: boolean;
+	options: string[];
+	selectedIdx: number | null;
 
 	static isMultipleChoiceQuestion(question: unknown): boolean {
 		const type = (question as { type: string })?.type;
@@ -57,18 +61,142 @@ export default class MCManager {
 	constructor(questionData: unknown) {
 		const validationErrors = this.validateData(questionData);
 
+		this.submitted = false;
+		this.selectedIdx = null;
+
 		if (validationErrors.length > 0) {
 			this.isValid = false;
 			this.errors = validationErrors;
+			this.options = [];
 		} else {
 			this.isValid = true;
 			this.errors = [];
 			this.data = questionData as MultipleChoiceData;
+			this.options = ["A", "B", "C", "D"];
 		}
+	}
+
+	private renderOption(label: string): HtmlRenderData {
+		return {
+			tag: "button",
+			clickHandler: () => {
+				console.log(`Option ${label} clicked`);
+			},
+			class: "clickable-icon w-full flex justify-start text-center p-4 rounded-lg border-2 transition-all border-gray-200 hover:border-gray-300 bg-white",
+			children: [
+				{
+					tag: "div",
+					class: "flex items-center gap-3",
+					children: [
+						{
+							tag: "div",
+							class: "w-5 h-5 rounded-full border-2 flex items-center justify-center border-gray-300",
+							children: [],
+						},
+						{
+							tag: "span",
+							class: "text-lg text-gray-900",
+							text: label,
+							children: [],
+						},
+					],
+				},
+			],
+		};
 	}
 
 	public render(
 		container: HTMLElement,
 		progressCallback: (isCorrect: boolean) => void,
-	): void {}
+	): void {
+		buildHTML(container, [
+			// Question
+			{
+				tag: "div",
+				class: "p-8",
+				children: [
+					{
+						tag: "p",
+						class: "text-xl mb-6 text-gray-900",
+						text: this.data.question,
+						children: [],
+					},
+					// Options
+					{
+						tag: "div",
+						class: "space-y-3 mb-6",
+						children: this.options.map((option) =>
+							this.renderOption(option),
+						),
+					},
+					// Feedback after submission
+					{
+						tag: "div",
+						class: "rounded-lg p-4 mb-6 bg-green-50 border-2 border-green-200",
+						children: [
+							{
+								tag: "div",
+								class: "flex items-start gap-3",
+								children: [
+									{
+										tag: "div",
+										class: "w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 bg-green-100",
+										children: [
+											{
+												tag: "svg",
+												class: "w-4 h-4 text-green-600",
+												children: [],
+											},
+										],
+									},
+									{
+										tag: "div",
+										children: [
+											{
+												tag: "div",
+												class: "mb-2 text-green-900",
+												text: "Correct!",
+												children: [],
+											},
+											{
+												tag: "div",
+												class: "text-sm text-gray-700",
+												text: "Dummy explanation",
+												children: [],
+											},
+										],
+									},
+								],
+							},
+						],
+					},
+				],
+			},
+			// Navigation
+			{
+				tag: "div",
+				class: "p-4 border-t border-gray-200",
+				children: [
+					{
+						tag: "button",
+						class: "clickable-icon w-full flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-purple-600 hover:bg-purple-700 text-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors",
+						clickHandler: () => {},
+						attrs: { disabled: false },
+						children: [
+							{
+								tag: "svg",
+								class: "w-4 h-4",
+								children: [],
+							},
+							{
+								tag: "span",
+								text: "Submit Answer",
+								children: [],
+							},
+						],
+					},
+				],
+			},
+		]);
+	}
 }

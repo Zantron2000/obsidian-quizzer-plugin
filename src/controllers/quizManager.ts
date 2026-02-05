@@ -358,6 +358,54 @@ export class QuizManager {
 			});
 		} else if (this.showStartMenu) {
 			buildHTML(this.container, this.#buildStartMenu());
+		} else if (this.questionIndex < this.questionManagers.length) {
+			const currentQM = this.questionManagers[this.questionIndex]!;
+			buildHTML(this.container, [
+				// Progress Bar
+				{
+					tag: "div",
+					class: "p-4 border-b border-gray-200",
+					children: [
+						{
+							tag: "div",
+							class: "flex items-center justify-between mb-2",
+							children: [
+								{
+									tag: "span",
+									class: "text-sm text-gray-600",
+									text: `Question ${this.questionIndex + 1} of ${this.questionManagers.length}`,
+									children: [],
+								},
+								{
+									tag: "span",
+									class: "text-sm text-gray-600",
+									text: `${this.questionIndex} answered`,
+									children: [],
+								},
+							],
+						},
+						{
+							tag: "div",
+							class: "w-full bg-gray-200 rounded-full h-2",
+							children: [
+								{
+									tag: "div",
+									class: "bg-purple-600 h-2 rounded-full transition-all",
+									attrs: {
+										style: `width: ${((this.questionIndex + 1) / this.questionManagers.length) * 100}%`,
+									},
+									children: [],
+								},
+							],
+						},
+					],
+				},
+			]);
+
+			const questionContainer = this.container.createEl("div", {});
+			currentQM.render(questionContainer, (isCorrect) =>
+				this.progress(isCorrect),
+			);
 		}
 	}
 }
