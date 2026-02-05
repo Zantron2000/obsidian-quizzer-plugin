@@ -76,13 +76,21 @@ export default class MCManager {
 		}
 	}
 
-	private renderOption(label: string): HtmlRenderData {
+	private renderOption(
+		optionIdx: number,
+		container: HTMLElement,
+		progressCallback: (isCorrect: boolean) => void,
+	): HtmlRenderData {
 		return {
 			tag: "button",
 			clickHandler: () => {
-				console.log(`Option ${label} clicked`);
+				this.selectedIdx = optionIdx;
+				this.render(container, progressCallback);
 			},
-			class: "clickable-icon w-full flex justify-start text-center p-4 rounded-lg border-2 transition-all border-gray-200 hover:border-gray-300 bg-white",
+			class: `
+				clickable-icon w-full flex justify-start text-center p-4 rounded-lg border-2 transition-all
+				${this.selectedIdx === optionIdx ? "border-purple-600 bg-purple-50" : "border-gray-200 hover:border-gray-300 bg-white"}
+			`,
 			children: [
 				{
 					tag: "div",
@@ -90,13 +98,16 @@ export default class MCManager {
 					children: [
 						{
 							tag: "div",
-							class: "w-5 h-5 rounded-full border-2 flex items-center justify-center border-gray-300",
+							class: `
+							  w-5 h-5 rounded-full border-2 flex items-center justify-center 
+							  ${this.selectedIdx === optionIdx ? "border-purple-600 bg-purple-600" : "border-gray-300"}
+							`,
 							children: [],
 						},
 						{
 							tag: "span",
 							class: "text-lg text-gray-900",
-							text: label,
+							text: this.options[optionIdx],
 							children: [],
 						},
 					],
@@ -109,6 +120,8 @@ export default class MCManager {
 		container: HTMLElement,
 		progressCallback: (isCorrect: boolean) => void,
 	): void {
+		container.empty();
+
 		buildHTML(container, [
 			// Question
 			{
@@ -125,14 +138,15 @@ export default class MCManager {
 					{
 						tag: "div",
 						class: "space-y-3 mb-6",
-						children: this.options.map((option) =>
-							this.renderOption(option),
+						children: this.options.map((_, idx) =>
+							this.renderOption(idx, container, progressCallback),
 						),
 					},
 					// Feedback after submission
 					{
 						tag: "div",
-						class: "rounded-lg p-4 mb-6 bg-green-50 border-2 border-green-200",
+						class: "rounded-lg px-4 py-2 mb-2 bg-green-50 border-2 border-green-200",
+						attrs: { hidden: !this.submitted },
 						children: [
 							{
 								tag: "div",
