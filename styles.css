@@ -2,6 +2,8 @@
 @layer properties;
 @layer theme, base, components, utilities;
 :root, :host {
+  --color-red-50: oklch(97.1% 0.013 17.38);
+  --color-red-600: oklch(57.7% 0.245 27.325);
   --color-yellow-500: oklch(79.5% 0.184 86.047);
   --color-green-50: oklch(98.2% 0.018 155.826);
   --color-green-100: oklch(96.2% 0.044 156.743);
@@ -223,8 +225,14 @@
 .border-green-200 {
   border-color: var(--color-green-200);
 }
+.border-green-600 {
+  border-color: var(--color-green-600);
+}
 .border-purple-600 {
   border-color: var(--color-purple-600);
+}
+.border-red-600 {
+  border-color: var(--color-red-600);
 }
 .bg-blue-50 {
   background-color: var(--color-blue-50);
@@ -241,11 +249,20 @@
 .bg-green-100 {
   background-color: var(--color-green-100);
 }
+.bg-green-600 {
+  background-color: var(--color-green-600);
+}
 .bg-purple-50 {
   background-color: var(--color-purple-50);
 }
 .bg-purple-600 {
   background-color: var(--color-purple-600);
+}
+.bg-red-50 {
+  background-color: var(--color-red-50);
+}
+.bg-red-600 {
+  background-color: var(--color-red-600);
 }
 .bg-white {
   background-color: var(--color-white);
@@ -317,6 +334,9 @@
 }
 .text-yellow-500 {
   color: var(--color-yellow-500);
+}
+.opacity-50 {
+  opacity: 50%;
 }
 .shadow-lg {
   --tw-shadow: 0 10px 15px -3px var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 4px 6px -4px var(--tw-shadow-color, rgb(0 0 0 / 0.1));

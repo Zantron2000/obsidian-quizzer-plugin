@@ -84,12 +84,14 @@ export default class MCManager {
 		return {
 			tag: "button",
 			clickHandler: () => {
-				this.selectedIdx = optionIdx;
-				this.render(container, progressCallback);
+				if (!this.submitted) {
+					this.selectedIdx = optionIdx;
+					this.render(container, progressCallback);
+				}
 			},
 			class: `
 				clickable-icon w-full flex justify-start text-center p-4 rounded-lg border-2 transition-all
-				${this.selectedIdx === optionIdx ? "border-purple-600 bg-purple-50" : "border-gray-200 hover:border-gray-300 bg-white"}
+				${this.getOptionClasses(optionIdx)}
 			`,
 			children: [
 				{
@@ -100,7 +102,7 @@ export default class MCManager {
 							tag: "div",
 							class: `
 							  w-5 h-5 rounded-full border-2 flex items-center justify-center 
-							  ${this.selectedIdx === optionIdx ? "border-purple-600 bg-purple-600" : "border-gray-300"}
+							  ${this.getOptionBubbleClasses(optionIdx)}
 							`,
 							children: [],
 						},
@@ -114,6 +116,50 @@ export default class MCManager {
 				},
 			],
 		};
+	}
+
+	private getOptionClasses(optionIdx: number): string {
+		if (this.submitted === false) {
+			if (this.selectedIdx === optionIdx) {
+				return "border-purple-600 bg-purple-50";
+			} else {
+				return "border-gray-200 hover:border-gray-300 bg-white";
+			}
+		} else {
+			const isAnswer = this.isRightAnswer(optionIdx);
+
+			if (isAnswer) {
+				return "border-green-600 bg-green-50";
+			} else if (optionIdx === this.selectedIdx) {
+				return "border-red-600 bg-red-50";
+			} else {
+				return "border-gray-200 bg-white opacity-50";
+			}
+		}
+	}
+
+	private getOptionBubbleClasses(optionIdx: number): string {
+		if (this.submitted === false) {
+			if (this.selectedIdx === optionIdx) {
+				return "border-purple-600 bg-purple-600";
+			} else {
+				return "border-gray-300 bg-white";
+			}
+		} else {
+			const isAnswer = this.isRightAnswer(optionIdx);
+
+			if (isAnswer) {
+				return "border-green-600 bg-green-600";
+			} else if (optionIdx === this.selectedIdx) {
+				return "border-red-600 bg-red-600";
+			} else {
+				return "border-gray-300 bg-white";
+			}
+		}
+	}
+
+	private isRightAnswer(optionIdx: number): boolean {
+		return this.options[optionIdx] === this.data.answer;
 	}
 
 	public render(
@@ -193,9 +239,27 @@ export default class MCManager {
 				children: [
 					{
 						tag: "button",
-						class: "clickable-icon w-full flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-purple-600 hover:bg-purple-700 text-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors",
-						clickHandler: () => {},
-						attrs: { disabled: false },
+						attrs:
+							this.selectedIdx === null
+								? { disabled: "true" }
+								: {},
+						class: `
+							clickable-icon w-full flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-purple-600 hover:bg-purple-700 text-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors
+						`,
+						clickHandler: () => {
+							if (this.selectedIdx !== null) {
+								if (!this.submitted) {
+									this.submitted = true;
+									this.render(container, progressCallback);
+								} else {
+									const isCorrect = this.isRightAnswer(
+										this.selectedIdx,
+									);
+
+									progressCallback(isCorrect);
+								}
+							}
+						},
 						children: [
 							{
 								tag: "svg",
@@ -204,7 +268,9 @@ export default class MCManager {
 							},
 							{
 								tag: "span",
-								text: "Submit Answer",
+								text: this.submitted
+									? "Move On"
+									: "Submit Answer",
 								children: [],
 							},
 						],
