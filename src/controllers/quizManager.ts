@@ -27,7 +27,7 @@ export class QuizManager {
 		this.prepareQuestionManagers(quizData);
 	}
 
-	prepareQuestionManagers(quizData: unknown): void {
+	private prepareQuestionManagers(quizData: unknown): void {
 		if (!Array.isArray(quizData)) {
 			this.errors.push("Quiz data should be an array of questions.");
 		} else {

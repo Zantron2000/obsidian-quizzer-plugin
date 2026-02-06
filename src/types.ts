@@ -16,3 +16,9 @@ export interface HtmlRenderData {
 		[key: string]: string | number | boolean | null;
 	};
 }
+
+export interface ErrorMessage {
+	questionIndex?: number;
+	message: string;
+	path: string;
+}
