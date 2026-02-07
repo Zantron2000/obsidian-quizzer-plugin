@@ -125,6 +125,115 @@ export default class MCManager {
 		return this.options[optionIdx] === this.data.answer;
 	}
 
+	private generateFeedback(): HtmlRenderData {
+		if (this.submitted === false) {
+			return {
+				tag: "div",
+				class: "hidden",
+				children: [],
+			};
+		}
+
+		const explanation = this.options[this.selectedIdx!]?.explanation;
+		const isCorrect = this.isRightAnswer(this.selectedIdx!);
+		const svg: HtmlRenderData = !isCorrect
+			? {
+					tag: "svg",
+					class: "w-4 h-4 text-red-600",
+					attrs: {
+						xmlns: "http://www.w3.org/2000/svg",
+						viewBox: "0 0 24 24",
+						fill: "none",
+						stroke: "currentColor",
+						"stroke-width": 2,
+						"stroke-linecap": "round",
+						"stroke-linejoin": "round",
+					},
+					children: [
+						{
+							tag: "path",
+							attrs: {
+								d: "M18 6 6 18",
+							},
+							children: [],
+						},
+						{
+							tag: "path",
+							attrs: {
+								d: "m6 6 12 12",
+							},
+							children: [],
+						},
+					],
+				}
+			: {
+					tag: "svg",
+					class: "w-4 h-4 text-green-600",
+					attrs: {
+						xmlns: "http://www.w3.org/2000/svg",
+						width: 24,
+						height: 24,
+						viewBox: "0 0 24 24",
+						fill: "none",
+						stroke: "currentColor",
+						"stroke-width": 2,
+						"stroke-linecap": "round",
+						"stroke-linejoin": "round",
+					},
+					children: [
+						{
+							tag: "path",
+							attrs: {
+								d: "M20 6 9 17l-5-5",
+							},
+							children: [],
+						},
+					],
+				};
+
+		return {
+			tag: "div",
+			class: `
+			  rounded-lg px-4 py-2 mb-2
+				${isCorrect ? "bg-green-50 border-2 border-green-200" : "bg-red-50 border-2 border-red-200"}
+				${explanation ? "block" : "hidden"}
+			`,
+			children: [
+				{
+					tag: "div",
+					class: "flex items-start gap-3",
+					children: [
+						{
+							tag: "div",
+							class: `
+								w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0
+								${isCorrect ? "bg-green-100" : "bg-red-100"}
+							`,
+							children: [svg],
+						},
+						{
+							tag: "div",
+							children: [
+								{
+									tag: "div",
+									class: `mb-2 ${isCorrect ? "text-green-900" : "text-red-900"}`,
+									text: isCorrect ? "Correct!" : "Incorrect",
+									children: [],
+								},
+								{
+									tag: "div",
+									class: "text-sm text-gray-700",
+									text: explanation,
+									children: [],
+								},
+							],
+						},
+					],
+				},
+			],
+		};
+	}
+
 	public render(
 		container: HTMLElement,
 		progressCallback: (isCorrect: boolean) => void,
@@ -152,47 +261,7 @@ export default class MCManager {
 						),
 					},
 					// Feedback after submission
-					{
-						tag: "div",
-						class: "rounded-lg px-4 py-2 mb-2 bg-green-50 border-2 border-green-200",
-						attrs: { hidden: !this.submitted },
-						children: [
-							{
-								tag: "div",
-								class: "flex items-start gap-3",
-								children: [
-									{
-										tag: "div",
-										class: "w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 bg-green-100",
-										children: [
-											{
-												tag: "svg",
-												class: "w-4 h-4 text-green-600",
-												children: [],
-											},
-										],
-									},
-									{
-										tag: "div",
-										children: [
-											{
-												tag: "div",
-												class: "mb-2 text-green-900",
-												text: "Correct!",
-												children: [],
-											},
-											{
-												tag: "div",
-												class: "text-sm text-gray-700",
-												text: "Dummy explanation",
-												children: [],
-											},
-										],
-									},
-								],
-							},
-						],
-					},
+					this.generateFeedback(),
 				],
 			},
 			// Navigation
