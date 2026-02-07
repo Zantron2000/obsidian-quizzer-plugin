@@ -7,7 +7,7 @@ export default class MCManager {
 	errors: string[] = [];
 	data: MultipleChoiceData;
 	submitted: boolean;
-	options: string[];
+	options: { label: string; explanation?: string }[];
 	selectedIdx: number | null;
 
 	static isMultipleChoiceQuestion(question: unknown): boolean {
@@ -16,13 +16,27 @@ export default class MCManager {
 		return MCManager.MULTIPLE_CHOICE_TYPES.includes(type);
 	}
 
+	private static shuffle<T>(array: T[]): T[] {
+		const shuffled = [...array];
+
+		for (let i = shuffled.length - 1; i > 0; i--) {
+			const j = Math.floor(Math.random() * (i + 1));
+			[shuffled[i], shuffled[j]] = [shuffled[j]!, shuffled[i]!];
+		}
+
+		return shuffled;
+	}
+
 	constructor(questionData: unknown) {
 		this.submitted = false;
 		this.selectedIdx = null;
 		this.isValid = true;
 		this.errors = [];
 		this.data = questionData as MultipleChoiceData;
-		this.options = ["A", "B", "C", "D"];
+		this.options = MCManager.shuffle([
+			...this.data.alternatives,
+			this.data.answer,
+		]);
 	}
 
 	private renderOption(
@@ -58,7 +72,7 @@ export default class MCManager {
 						{
 							tag: "span",
 							class: "text-lg text-gray-900",
-							text: this.options[optionIdx],
+							text: this.options[optionIdx]?.label,
 							children: [],
 						},
 					],

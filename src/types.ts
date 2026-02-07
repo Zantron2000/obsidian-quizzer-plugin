@@ -1,7 +1,10 @@
 export interface MultipleChoiceData {
 	type: string;
 	question: string;
-	answer: string;
+	answer: {
+		label: string;
+		explanation?: string;
+	};
 	alternatives: {
 		label: string;
 		explanation?: string;
