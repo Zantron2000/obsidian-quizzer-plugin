@@ -1,10 +1,10 @@
 import { HtmlRenderData } from "types";
 import MCManager from "./mcManager";
 import buildHTML from "view/buildHTML";
+import ErrorManager from "./errorManager";
 
 export class QuizManager {
 	questionManagers: MCManager[] = [];
-	errors: string[] = [];
 	questionIndex: number = 0;
 	showStartMenu: boolean = true;
 	container: HTMLElement;
@@ -13,10 +13,12 @@ export class QuizManager {
 		class: "bg-white rounded-lg shadow-lg p-8 border border-gray-200",
 		children: [],
 	};
+	errorManager: ErrorManager;
 
 	constructor(quizData: unknown, el: HTMLElement) {
 		this.questionManagers = [];
-		this.errors = [];
+		this.errorManager = new ErrorManager(quizData);
+
 		this.container = el.createEl(
 			this.htmlContainer.tag as keyof HTMLElementTagNameMap,
 			{
@@ -24,25 +26,11 @@ export class QuizManager {
 			},
 		);
 
-		this.prepareQuestionManagers(quizData);
-	}
-
-	private prepareQuestionManagers(quizData: unknown): void {
-		if (!Array.isArray(quizData)) {
-			this.errors.push("Quiz data should be an array of questions.");
-		} else {
-			if (quizData.length === 0) {
-				this.errors.push("Quiz data cannot be an empty array.");
-			}
-
-			(quizData as unknown[]).forEach((question, idx) => {
+		if (this.errorManager.isValid) {
+			(quizData as unknown[]).forEach((question) => {
 				if (MCManager.isMultipleChoiceQuestion(question)) {
 					const mcManager = new MCManager(question);
 					this.questionManagers.push(mcManager);
-				} else {
-					this.errors.push(
-						`Question #${idx} has an unregistered question type`,
-					);
 				}
 			});
 		}
@@ -317,45 +305,9 @@ export class QuizManager {
 
 	render(): void {
 		this.container.empty();
-		const hasErrors =
-			this.errors.length > 0 ||
-			this.questionManagers.some((qm) => !qm.isValid);
 
-		if (hasErrors) {
-			this.container.createEl("p", {
-				cls: "text-black",
-				text: "Errors in quiz data:",
-			});
-
-			const list = this.container.createEl("ul", {
-				cls: "list-disc list-inside",
-			});
-			this.errors.forEach((error) => {
-				list.createEl("li", {
-					cls: "text-black",
-					text: `${error}`,
-				});
-			});
-
-			this.questionManagers.forEach((qm, idx) => {
-				if (!qm.isValid) {
-					list.createEl("li", {
-						cls: "text-black",
-						text: `Question #${idx + 1} has the following errors:`,
-					});
-
-					const questionList = list.createEl("ul", {
-						cls: "list-disc list-inside ml-6",
-					});
-
-					qm.errors.forEach((error) => {
-						questionList.createEl("li", {
-							cls: "text-black",
-							text: `${error}`,
-						});
-					});
-				}
-			});
+		if (!this.errorManager.isValid) {
+			this.errorManager.render(this.container);
 		} else if (this.showStartMenu) {
 			buildHTML(this.container, this.#buildStartMenu());
 		} else if (this.questionIndex < this.questionManagers.length) {
