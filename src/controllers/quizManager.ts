@@ -2,6 +2,7 @@ import { HtmlRenderData, Quiz } from "types";
 import MCManager from "./mcManager";
 import buildHTML from "view/buildHTML";
 import ErrorManager from "./errorManager";
+import ResultsManager from "./resultsManager";
 
 export class QuizManager {
 	questionManagers: MCManager[] = [];
@@ -14,10 +15,12 @@ export class QuizManager {
 		children: [],
 	};
 	errorManager: ErrorManager;
+	resultsManager: ResultsManager;
 
 	constructor(quizData: unknown, el: HTMLElement) {
 		this.questionManagers = [];
 		this.errorManager = new ErrorManager(quizData);
+		this.resultsManager = new ResultsManager();
 
 		this.container = el.createEl(
 			this.htmlContainer.tag as keyof HTMLElementTagNameMap,
@@ -360,6 +363,8 @@ export class QuizManager {
 			currentQM.render(questionContainer, (isCorrect) =>
 				this.progress(isCorrect),
 			);
+		} else {
+			this.resultsManager.render(this.container);
 		}
 	}
 }
