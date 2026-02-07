@@ -38,7 +38,7 @@ export default class ErrorManager {
 			question: { type: "string", format: "non-empty-string" },
 			answer: {
 				type: "object",
-				required: ["label", "explanation"],
+				required: ["label"],
 				properties: {
 					label: { type: "string", format: "non-empty-string" },
 					explanation: { type: "string", format: "non-empty-string" },
@@ -94,13 +94,7 @@ export default class ErrorManager {
 			(quizData as { data: unknown[] }).data.forEach(
 				(question, index) => {
 					if (!badQuestionIndexes.has(index)) {
-						const typedQuestion = question as { type: string };
-
-						if (
-							MCManager.isMultipleChoiceQuestion(
-								typedQuestion?.type,
-							)
-						) {
+						if (MCManager.isMultipleChoiceQuestion(question)) {
 							const mcValidationResult = validator.validate(
 								question,
 								ErrorManager.multipleChoiceSchema,
