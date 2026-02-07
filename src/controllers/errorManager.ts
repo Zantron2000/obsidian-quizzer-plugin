@@ -8,8 +8,8 @@ export default class ErrorManager {
 		type: "object",
 		required: ["title", "description"],
 		properties: {
-			title: { type: "string", pattern: "\\S" },
-			description: { type: "string", pattern: "\\S" },
+			title: { type: "string", format: "non-empty-string" },
+			description: { type: "string", format: "non-empty-string" },
 			data: {
 				type: "array",
 				minItems: 1,
@@ -41,7 +41,7 @@ export default class ErrorManager {
 				required: ["label", "explanation"],
 				properties: {
 					label: { type: "string", format: "non-empty-string" },
-					explanation: { type: "string" },
+					explanation: { type: "string", format: "non-empty-string" },
 				},
 			},
 			alternatives: {
@@ -49,7 +49,7 @@ export default class ErrorManager {
 				minItems: 1,
 				items: {
 					type: "object",
-					required: ["label", "explanation"],
+					required: ["label"],
 					properties: {
 						label: { type: "string", format: "non-empty-string" },
 						explanation: { type: "string" },

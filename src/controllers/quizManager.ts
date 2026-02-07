@@ -1,4 +1,4 @@
-import { HtmlRenderData } from "types";
+import { HtmlRenderData, Quiz } from "types";
 import MCManager from "./mcManager";
 import buildHTML from "view/buildHTML";
 import ErrorManager from "./errorManager";
@@ -27,9 +27,11 @@ export class QuizManager {
 		);
 
 		if (this.errorManager.isValid) {
-			(quizData as unknown[]).forEach((question) => {
-				if (MCManager.isMultipleChoiceQuestion(question)) {
-					const mcManager = new MCManager(question);
+			const typedQuizData = quizData as Quiz;
+
+			typedQuizData.data.forEach((questionData) => {
+				if (MCManager.isMultipleChoiceQuestion(questionData)) {
+					const mcManager = new MCManager(questionData);
 					this.questionManagers.push(mcManager);
 				}
 			});

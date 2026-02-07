@@ -2,7 +2,10 @@ export interface MultipleChoiceData {
 	type: string;
 	question: string;
 	answer: string;
-	alternatives: string[];
+	alternatives: {
+		label: string;
+		explanation?: string;
+	}[];
 }
 
 export interface HtmlRenderData {
@@ -15,6 +18,12 @@ export interface HtmlRenderData {
 	attrs?: {
 		[key: string]: string | number | boolean | null;
 	};
+}
+
+export interface Quiz {
+	title: string;
+	description?: string;
+	data: [MultipleChoiceData];
 }
 
 export interface ErrorMessage {
