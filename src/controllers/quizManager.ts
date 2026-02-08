@@ -16,6 +16,7 @@ export class QuizManager {
 	};
 	errorManager: ErrorManager;
 	resultsManager: ResultsManager;
+	correctQuestions: boolean[] = [];
 
 	constructor(quizData: unknown, el: HTMLElement) {
 		this.questionManagers = [];
@@ -304,6 +305,7 @@ export class QuizManager {
 
 	progress(isCorrect: boolean): void {
 		this.questionIndex += 1;
+		this.correctQuestions.push(isCorrect);
 
 		this.render();
 	}
@@ -364,7 +366,7 @@ export class QuizManager {
 				this.progress(isCorrect),
 			);
 		} else {
-			this.resultsManager.render(this.container);
+			this.resultsManager.render(this.container, this.correctQuestions);
 		}
 	}
 }

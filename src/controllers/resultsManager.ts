@@ -3,7 +3,7 @@ import buildHTML from "view/buildHTML";
 export default class ResultsManager {
 	constructor() {}
 
-	render(container: HTMLElement) {
+	render(container: HTMLElement, correctQuestions: boolean[]): void {
 		container.empty();
 
 		buildHTML(container, [
@@ -41,7 +41,7 @@ export default class ResultsManager {
 						],
 					},
 					{
-						tag: "h2",
+						tag: "p",
 						class: "text-3xl mb-2 text-gray-900",
 						text: "Quiz Complete!",
 						children: [],
@@ -62,7 +62,7 @@ export default class ResultsManager {
 					{
 						tag: "div",
 						class: "text-5xl mb-2 text-purple-600",
-						text: "85%", // dummy value for percentage
+						text: `${Math.round((correctQuestions.filter(Boolean).length / correctQuestions.length) * 100)}%`, // calculated percentage
 						children: [],
 					},
 					{
@@ -77,7 +77,7 @@ export default class ResultsManager {
 							{
 								tag: "span",
 								class: "text-purple-600",
-								text: "8", // dummy value for score
+								text: `${correctQuestions.filter(Boolean).length}`,
 								children: [],
 							},
 							{
@@ -88,7 +88,7 @@ export default class ResultsManager {
 							{
 								tag: "span",
 								class: "text-purple-600",
-								text: "10", // dummy value for totalQuestions
+								text: `${correctQuestions.length}`,
 								children: [],
 							},
 							{
@@ -100,7 +100,6 @@ export default class ResultsManager {
 					},
 				],
 			},
-			// Question Results List
 			{
 				tag: "div",
 				class: "space-y-2 mb-8",
