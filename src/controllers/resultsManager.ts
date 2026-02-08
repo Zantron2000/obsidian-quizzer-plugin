@@ -1,7 +1,89 @@
+import { HtmlRenderData } from "types";
 import buildHTML from "view/buildHTML";
 
 export default class ResultsManager {
 	constructor() {}
+
+	private renderQuestionResult(
+		isCorrect: boolean,
+		questionIdx: number,
+	): HtmlRenderData {
+		const svg: HtmlRenderData = !isCorrect
+			? {
+					tag: "svg",
+					class: "w-4 h-4 text-red-600",
+					attrs: {
+						xmlns: "http://www.w3.org/2000/svg",
+						viewBox: "0 0 24 24",
+						fill: "none",
+						stroke: "currentColor",
+						"stroke-width": 2,
+						"stroke-linecap": "round",
+						"stroke-linejoin": "round",
+					},
+					children: [
+						{
+							tag: "path",
+							attrs: {
+								d: "M18 6 6 18",
+							},
+							children: [],
+						},
+						{
+							tag: "path",
+							attrs: {
+								d: "m6 6 12 12",
+							},
+							children: [],
+						},
+					],
+				}
+			: {
+					tag: "svg",
+					class: "w-4 h-4 text-green-600",
+					attrs: {
+						xmlns: "http://www.w3.org/2000/svg",
+						width: 24,
+						height: 24,
+						viewBox: "0 0 24 24",
+						fill: "none",
+						stroke: "currentColor",
+						"stroke-width": 2,
+						"stroke-linecap": "round",
+						"stroke-linejoin": "round",
+					},
+					children: [
+						{
+							tag: "path",
+							attrs: {
+								d: "M20 6 9 17l-5-5",
+							},
+							children: [],
+						},
+					],
+				};
+
+		return {
+			tag: "div",
+			class: "flex items-center gap-3 p-3 bg-gray-50 rounded-lg",
+			children: [
+				{
+					tag: "div",
+					class: `
+					  w-6 h-6 rounded-full flex items-center justify-center
+						${isCorrect ? " bg-green-100" : " bg-red-100"}
+					`,
+					children: [svg],
+				},
+				{
+					tag: "span",
+					class: "text-sm text-gray-700",
+					text: "Question 1",
+					children: [],
+				},
+			],
+		};
+	}
 
 	render(
 		container: HTMLElement,
@@ -107,49 +189,9 @@ export default class ResultsManager {
 			{
 				tag: "div",
 				class: "space-y-2 mb-8",
-				children: [
-					// Example for 3 questions, mix correct/incorrect
-					{
-						tag: "div",
-						class: "flex items-center gap-3 p-3 bg-gray-50 rounded-lg",
-						children: [
-							{
-								tag: "div",
-								class: "w-6 h-6 rounded-full flex items-center justify-center bg-green-100",
-								children: [
-									{
-										tag: "svg",
-										class: "w-4 h-4 text-green-600",
-										attrs: {
-											xmlns: "http://www.w3.org/2000/svg",
-											width: 24,
-											height: 24,
-											viewBox: "0 0 24 24",
-											fill: "none",
-											stroke: "currentColor",
-											"stroke-width": 2,
-											"stroke-linecap": "round",
-											"stroke-linejoin": "round",
-										},
-										children: [
-											{
-												tag: "path",
-												attrs: { d: "M20 6 9 17l-5-5" },
-												children: [],
-											},
-										],
-									},
-								],
-							},
-							{
-								tag: "span",
-								class: "text-sm text-gray-700",
-								text: "Question 1",
-								children: [],
-							},
-						],
-					},
-				],
+				children: correctQuestions.map((isCorrect, index) =>
+					this.renderQuestionResult(isCorrect, index),
+				),
 			},
 			// Back to Start Button
 			{
