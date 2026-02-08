@@ -3,7 +3,11 @@ import buildHTML from "view/buildHTML";
 export default class ResultsManager {
 	constructor() {}
 
-	render(container: HTMLElement, correctQuestions: boolean[]): void {
+	render(
+		container: HTMLElement,
+		correctQuestions: boolean[],
+		resetCallback: () => void,
+	): void {
 		container.empty();
 
 		buildHTML(container, [
@@ -150,13 +154,13 @@ export default class ResultsManager {
 			// Back to Start Button
 			{
 				tag: "button",
-				class: "w-full bg-purple-600 hover:bg-purple-700 text-white py-4 rounded-lg flex items-center justify-center gap-2 transition-colors",
-				clickHandler: () => {}, // dummy function
+				class: "cursor-pointer w-full bg-accent hover:bg-accent-dark text-white hover:text-white py-4 rounded-lg flex items-center justify-center gap-2 clickable-icon transition-colors",
+				clickHandler: () => resetCallback(),
 				children: [
 					{
 						tag: "svg",
 						class: "w-5 h-5",
-						children: [], // Home icon placeholder
+						children: [],
 					},
 					{
 						tag: "span",

@@ -310,6 +310,15 @@ export class QuizManager {
 		this.render();
 	}
 
+	reset(): void {
+		this.questionIndex = 0;
+		this.correctQuestions = [];
+		this.showStartMenu = true;
+		this.questionManagers.forEach((qm) => qm.reset());
+
+		this.render();
+	}
+
 	render(): void {
 		this.container.empty();
 
@@ -366,7 +375,11 @@ export class QuizManager {
 				this.progress(isCorrect),
 			);
 		} else {
-			this.resultsManager.render(this.container, this.correctQuestions);
+			this.resultsManager.render(
+				this.container,
+				this.correctQuestions,
+				() => this.reset(),
+			);
 		}
 	}
 }

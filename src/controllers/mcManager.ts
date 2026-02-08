@@ -234,6 +234,11 @@ export default class MCManager {
 		};
 	}
 
+	public reset(): void {
+		this.selectedIdx = null;
+		this.submitted = false;
+	}
+
 	public render(
 		container: HTMLElement,
 		progressCallback: (isCorrect: boolean) => void,
