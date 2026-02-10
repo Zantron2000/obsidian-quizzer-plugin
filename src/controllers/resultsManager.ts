@@ -78,7 +78,7 @@ export default class ResultsManager {
 				{
 					tag: "span",
 					class: "text-sm text-gray-700",
-					text: "Question 1",
+					text: `Question ${questionIdx + 1}`,
 					children: [],
 				},
 			],

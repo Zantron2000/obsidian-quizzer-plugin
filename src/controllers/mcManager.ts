@@ -1,7 +1,7 @@
-import { HtmlRenderData, MultipleChoiceData } from "types";
+import { HtmlRenderData, MultipleChoiceData, QuestionManager } from "types";
 import buildHTML from "view/buildHTML";
 
-export default class MCManager {
+export default class MCManager implements QuestionManager {
 	static MULTIPLE_CHOICE_TYPES = ["multiple-choice", "mc"];
 	isValid: boolean;
 	errors: string[] = [];
@@ -122,7 +122,7 @@ export default class MCManager {
 	}
 
 	private isRightAnswer(optionIdx: number): boolean {
-		return this.options[optionIdx] === this.data.answer;
+		return this.options[optionIdx]?.label === this.data.answer.label;
 	}
 
 	private generateFeedback(): HtmlRenderData {
