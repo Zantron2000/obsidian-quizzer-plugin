@@ -11,6 +11,26 @@ export interface MultipleChoiceData {
 	}[];
 }
 
+export interface TrueFalseData {
+	type: string;
+	question: string;
+	answer: {
+		label: boolean;
+		explanation?: string;
+	};
+	incorrectExplanation?: string;
+}
+
+export interface ShortAnswerData {
+	type: string;
+	question: string;
+	answer: {
+		label: string;
+		explanation?: string;
+	};
+	incorrectExplanation?: string;
+}
+
 export interface HtmlRenderData {
 	tag: keyof HTMLElementTagNameMap | keyof SVGElementTagNameMap;
 	text?: string;
@@ -33,4 +53,12 @@ export interface ErrorMessage {
 	questionIndex?: number;
 	message: string;
 	path: string;
+}
+
+export interface QuestionManager {
+	reset(): void;
+	render(
+		container: HTMLElement,
+		progressCallback: (isCorrect: boolean) => void,
+	): void;
 }

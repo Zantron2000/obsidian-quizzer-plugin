@@ -1,11 +1,12 @@
-import { HtmlRenderData, Quiz } from "types";
+import { HtmlRenderData, QuestionManager, Quiz } from "types";
 import MCManager from "./mcManager";
 import buildHTML from "view/buildHTML";
 import ErrorManager from "./errorManager";
 import ResultsManager from "./resultsManager";
+import TFManager from "./tfManager";
 
 export class QuizManager {
-	questionManagers: MCManager[] = [];
+	questionManagers: QuestionManager[] = [];
 	questionIndex: number = 0;
 	showStartMenu: boolean = true;
 	container: HTMLElement;
@@ -37,6 +38,9 @@ export class QuizManager {
 				if (MCManager.isMultipleChoiceQuestion(questionData)) {
 					const mcManager = new MCManager(questionData);
 					this.questionManagers.push(mcManager);
+				} else if (TFManager.isTrueFalseQuestion(questionData)) {
+					const tfManager = new TFManager(questionData);
+					this.questionManagers.push(tfManager);
 				}
 			});
 		}

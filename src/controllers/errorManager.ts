@@ -2,6 +2,7 @@ import { Validator } from "jsonschema";
 import MCManager from "./mcManager";
 import { ErrorMessage, HtmlRenderData } from "types";
 import buildHTML from "view/buildHTML";
+import TFManager from "./tfManager";
 
 export default class ErrorManager {
 	private static quizzSchema = {
@@ -19,10 +20,58 @@ export default class ErrorManager {
 					properties: {
 						type: {
 							type: "string",
-							enum: ["multiple-choice", "mc"],
+							enum: ["multiple-choice", "mc", "true-false", "tf"],
 						},
 					},
 				},
+			},
+		},
+	};
+
+	private static shortAnswerSchema = {
+		type: "object",
+		required: ["type", "question", "answer"],
+		properties: {
+			type: {
+				type: "string",
+				enum: ["short-answer", "sa"],
+			},
+			question: { type: "string", format: "non-empty-string" },
+			answer: {
+				type: "object",
+				required: ["label"],
+				properties: {
+					label: { type: "string", format: "non-empty-string" },
+					explanation: { type: "string", format: "non-empty-string" },
+				},
+			},
+			incorrectExplanation: {
+				type: "string",
+				format: "non-empty-string",
+			},
+		},
+	};
+
+	private static trueFalseSchema = {
+		type: "object",
+		required: ["type", "question", "answer"],
+		properties: {
+			type: {
+				type: "string",
+				enum: ["true-false", "tf"],
+			},
+			question: { type: "string", format: "non-empty-string" },
+			answer: {
+				type: "object",
+				required: ["label"],
+				properties: {
+					label: { type: "boolean" },
+					explanation: { type: "string", format: "non-empty-string" },
+				},
+			},
+			incorrectExplanation: {
+				type: "string",
+				format: "non-empty-string",
 			},
 		},
 	};
@@ -102,6 +151,22 @@ export default class ErrorManager {
 
 							if (!mcValidationResult.valid) {
 								mcValidationResult.errors.forEach((error) => {
+									const { message, property } = error;
+									errors.push({
+										questionIndex: index,
+										path: property,
+										message: message,
+									});
+								});
+							}
+						} else if (TFManager.isTrueFalseQuestion(question)) {
+							const tfValidationResult = validator.validate(
+								question,
+								ErrorManager.trueFalseSchema,
+							);
+
+							if (!tfValidationResult.valid) {
+								tfValidationResult.errors.forEach((error) => {
 									const { message, property } = error;
 									errors.push({
 										questionIndex: index,
