@@ -37,18 +37,12 @@ export default class ErrorManager {
 				enum: ["short-answer", "sa"],
 			},
 			question: { type: "string", format: "non-empty-string" },
-			answer: {
-				type: "object",
-				required: ["label"],
-				properties: {
-					label: { type: "string", format: "non-empty-string" },
-					explanation: { type: "string", format: "non-empty-string" },
-				},
+			answer: { type: "string", format: "non-empty-string" },
+			acceptableVariations: {
+				type: "array",
+				items: { type: "string", format: "non-empty-string" },
 			},
-			incorrectExplanation: {
-				type: "string",
-				format: "non-empty-string",
-			},
+			caseSensitive: { type: "boolean" },
 		},
 	};
 

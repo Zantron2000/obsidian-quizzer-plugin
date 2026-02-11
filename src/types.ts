@@ -24,11 +24,9 @@ export interface TrueFalseData {
 export interface ShortAnswerData {
 	type: string;
 	question: string;
-	answer: {
-		label: string;
-		explanation?: string;
-	};
-	incorrectExplanation?: string;
+	answer: string;
+	acceptableVariations?: string[];
+	caseSensitive?: boolean;
 }
 
 export interface HtmlRenderData {
