@@ -237,6 +237,7 @@ export default class MCManager implements QuestionManager {
 	public reset(): void {
 		this.selectedIdx = null;
 		this.submitted = false;
+		this.options = MCManager.shuffle(this.options);
 	}
 
 	public render(

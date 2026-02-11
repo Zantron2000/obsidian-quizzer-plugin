@@ -19,6 +19,17 @@ export class QuizManager {
 	resultsManager: ResultsManager;
 	correctQuestions: boolean[] = [];
 
+	private static shuffle<T>(array: T[]): T[] {
+		const shuffled = [...array];
+
+		for (let i = shuffled.length - 1; i > 0; i--) {
+			const j = Math.floor(Math.random() * (i + 1));
+			[shuffled[i], shuffled[j]] = [shuffled[j]!, shuffled[i]!];
+		}
+
+		return shuffled;
+	}
+
 	constructor(quizData: unknown, el: HTMLElement) {
 		this.questionManagers = [];
 		this.errorManager = new ErrorManager(quizData);
@@ -318,6 +329,7 @@ export class QuizManager {
 		this.questionIndex = 0;
 		this.correctQuestions = [];
 		this.showStartMenu = true;
+		this.questionManagers = QuizManager.shuffle(this.questionManagers);
 		this.questionManagers.forEach((qm) => qm.reset());
 
 		this.render();
