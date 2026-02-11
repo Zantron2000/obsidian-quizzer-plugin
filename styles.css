@@ -484,28 +484,28 @@
   background-color: hsl(var(--accent-h), var(--accent-s), var(--accent-l));
 }
 .bg-accent-light {
-  background-color: hsl(	var(--accent-h),	var(--accent-s),	calc(var(--accent-l) + 20%)	);
+  background-color: hsl(	var(--accent-h),	var(--accent-s),	calc(var(--accent-l) + 5%)	);
 }
 .bg-accent-dark {
-  background-color: hsl(	var(--accent-h),	var(--accent-s),	calc(var(--accent-l) - 20%)	);
+  background-color: hsl(	var(--accent-h),	var(--accent-s),	calc(var(--accent-l))	);
 }
 .text-accent {
   color: hsl(var(--accent-h), var(--accent-s), var(--accent-l));
 }
 .text-accent-light {
-  color: hsl(var(--accent-h), var(--accent-s), calc(var(--accent-l) + 20%));
+  color: hsl(var(--accent-h), var(--accent-s), calc(var(--accent-l) + 5%));
 }
 .text-accent-dark {
-  color: hsl(var(--accent-h), var(--accent-s), calc(var(--accent-l) - 20%));
+  color: hsl(var(--accent-h), var(--accent-s), calc(var(--accent-l) - 5%));
 }
 .hover\:bg-accent:hover {
   background-color: hsl(var(--accent-h), var(--accent-s), var(--accent-l));
 }
 .hover\:bg-accent-light:hover {
-  background-color: hsl(	var(--accent-h),	var(--accent-s),	calc(var(--accent-l) + 20%)	);
+  background-color: hsl(	var(--accent-h),	var(--accent-s),	calc(var(--accent-l) + 5%)	);
 }
 .hover\:bg-accent-dark:hover {
-  background-color: hsl(	var(--accent-h),	var(--accent-s),	calc(var(--accent-l) - 20%)	);
+  background-color: hsl(	var(--accent-h),	var(--accent-s),	calc(var(--accent-l) - 5%)	);
 }
 @property --tw-space-y-reverse {
   syntax: "*";

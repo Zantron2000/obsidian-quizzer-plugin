@@ -11,7 +11,7 @@
 	background-color: hsl(
 		var(--accent-h),
 		var(--accent-s),
-		calc(var(--accent-l) + 20%)
+		calc(var(--accent-l) + 5%)
 	);
 }
 
@@ -19,7 +19,7 @@
 	background-color: hsl(
 		var(--accent-h),
 		var(--accent-s),
-		calc(var(--accent-l) - 20%)
+		calc(var(--accent-l))
 	);
 }
 
@@ -28,11 +28,11 @@
 }
 
 .text-accent-light {
-	color: hsl(var(--accent-h), var(--accent-s), calc(var(--accent-l) + 20%));
+	color: hsl(var(--accent-h), var(--accent-s), calc(var(--accent-l) + 5%));
 }
 
 .text-accent-dark {
-	color: hsl(var(--accent-h), var(--accent-s), calc(var(--accent-l) - 20%));
+	color: hsl(var(--accent-h), var(--accent-s), calc(var(--accent-l) - 5%));
 }
 
 .hover\:bg-accent:hover {
@@ -43,7 +43,7 @@
 	background-color: hsl(
 		var(--accent-h),
 		var(--accent-s),
-		calc(var(--accent-l) + 20%)
+		calc(var(--accent-l) + 5%)
 	);
 }
 
@@ -51,6 +51,6 @@
 	background-color: hsl(
 		var(--accent-h),
 		var(--accent-s),
-		calc(var(--accent-l) - 20%)
+		calc(var(--accent-l) - 5%)
 	);
 }
