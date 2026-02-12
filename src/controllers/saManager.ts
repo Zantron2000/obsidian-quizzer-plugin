@@ -57,7 +57,128 @@ export default class SAManager implements QuestionManager {
 
 		buildHTML(container, [
 			// Question
-
+			{
+				tag: "div",
+				class: "p-8",
+				children: [
+					{
+						tag: "p",
+						text: "Sample question text",
+						class: "text-xl mb-6 text-gray-900",
+						children: [],
+					},
+					{
+						tag: "div",
+						class: "mb-6",
+						children: [
+							{
+								tag: "input",
+								class: "clickable-icon cursor-pointer w-full p-4 border-2 border-gray-200 rounded-lg focus:border-purple-600 focus:outline-none disabled:bg-gray-50 disabled:cursor-not-allowed text-gray-900",
+								attrs: {
+									type: "text",
+									value: "user input",
+									placeholder: "Type your answer here...",
+								},
+								children: [],
+							},
+						],
+					},
+					// Feedback block (example: submitted && incorrect)
+					{
+						tag: "div",
+						class: "rounded-lg p-4 mb-6 bg-amber-50 border-2 border-amber-200 hidden",
+						children: [
+							{
+								tag: "div",
+								class: "flex items-start gap-3",
+								children: [
+									{
+										tag: "div",
+										class: "w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 bg-amber-100",
+										children: [
+											{
+												tag: "span",
+												text: "✖",
+												class: "w-4 h-4 text-amber-600",
+												children: [],
+											},
+										],
+									},
+									{
+										tag: "div",
+										class: "flex-1",
+										children: [
+											{
+												tag: "div",
+												text: "Your answer was marked incorrect",
+												class: "mb-2 text-amber-900",
+												children: [],
+											},
+											{
+												tag: "div",
+												class: "text-sm text-gray-700 mb-3",
+												children: [
+													{
+														tag: "div",
+														class: "mb-1",
+														children: [
+															{
+																tag: "span",
+																text: "Your answer:",
+																class: "text-gray-600",
+																children: [],
+															},
+															{
+																tag: "span",
+																text: " user-submitted-answer",
+																class: "font-medium",
+																children: [],
+															},
+														],
+													},
+													{
+														tag: "div",
+														children: [
+															{
+																tag: "span",
+																text: "Correct answer:",
+																class: "text-gray-600",
+																children: [],
+															},
+															{
+																tag: "span",
+																text: " expected-correct-answer",
+																class: "font-medium",
+																children: [],
+															},
+														],
+													},
+												],
+											},
+											{
+												tag: "button",
+												text: "Actually I was Correct",
+												class: "flex items-center gap-2 px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white text-sm rounded-lg transition-colors",
+												clickHandler: () => {
+													/* dummy override handler */
+												},
+												children: [
+													{
+														tag: "span",
+														text: "⟳",
+														class: "w-4 h-4",
+														children: [],
+													},
+												],
+											},
+										],
+									},
+								],
+							},
+						],
+					},
+				],
+			},
 			// Navigation
 			{
 				tag: "div",
