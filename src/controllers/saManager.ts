@@ -7,7 +7,7 @@ export default class SAManager implements QuestionManager {
 	errors: string[] = [];
 	data: ShortAnswerData;
 	submitted: boolean;
-	input: string;
+	input: string | null;
 
 	static isShortAnswerQuestion(question: unknown): boolean {
 		const type = (question as { type: string })?.type;
@@ -17,7 +17,7 @@ export default class SAManager implements QuestionManager {
 
 	constructor(questionData: unknown) {
 		this.submitted = false;
-		this.input = "";
+		this.input = null;
 		this.isValid = true;
 		this.errors = [];
 		this.data = questionData as ShortAnswerData;
@@ -50,7 +50,7 @@ export default class SAManager implements QuestionManager {
 
 	public reset(): void {
 		this.submitted = false;
-		this.input = "";
+		this.input = null;
 	}
 
 	public render(
@@ -193,7 +193,6 @@ export default class SAManager implements QuestionManager {
 				children: [
 					{
 						tag: "button",
-						attrs: this.input === null ? { disabled: "true" } : {},
 						class: `
 							clickable-icon w-full flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-purple-600 hover:bg-purple-700 text-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors
 						`,
