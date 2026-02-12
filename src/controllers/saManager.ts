@@ -23,7 +23,11 @@ export default class SAManager implements QuestionManager {
 		this.data = questionData as ShortAnswerData;
 	}
 
-	private isRightAnswer(label: string): boolean {
+	private isRightAnswer(label: string | null): boolean {
+		if (label === null) {
+			return false;
+		}
+
 		if (this.data.caseSensitive === false) {
 			return (
 				this.data.answer.toLowerCase() === label.toLowerCase() ||
@@ -90,10 +94,9 @@ export default class SAManager implements QuestionManager {
 							},
 						],
 					},
-					// Feedback block (example: submitted && incorrect)
 					{
 						tag: "div",
-						class: "rounded-lg p-4 mb-6 bg-amber-50 border-2 border-amber-200 hidden",
+						class: `rounded-lg p-4 mb-6 bg-amber-50 border-2 border-amber-200 ${this.submitted && !this.isRightAnswer(this.input) ? "block" : "hidden"}`,
 						children: [
 							{
 								tag: "div",
