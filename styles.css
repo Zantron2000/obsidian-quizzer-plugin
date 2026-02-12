@@ -41,6 +41,8 @@
   --text-xs--line-height: calc(1 / 0.75);
   --text-sm: 0.875rem;
   --text-sm--line-height: calc(1.25 / 0.875);
+  --text-base: 1rem;
+  --text-base--line-height: calc(1.5 / 1);
   --text-lg: 1.125rem;
   --text-lg--line-height: calc(1.75 / 1.125);
   --text-xl: 1.25rem;
@@ -82,6 +84,9 @@
 }
 .mx-auto {
   margin-inline: auto;
+}
+.mt-0 {
+  margin-top: calc(var(--spacing) * 0);
 }
 .mt-0\.5 {
   margin-top: calc(var(--spacing) * 0.5);
@@ -178,6 +183,9 @@
 }
 .flex-1 {
   flex: 1;
+}
+.flex-shrink {
+  flex-shrink: 1;
 }
 .flex-shrink-0 {
   flex-shrink: 0;
@@ -370,6 +378,9 @@
 .px-4 {
   padding-inline: calc(var(--spacing) * 4);
 }
+.px-4\! {
+  padding-inline: calc(var(--spacing) * 4) !important;
+}
 .px-6 {
   padding-inline: calc(var(--spacing) * 6);
 }
@@ -384,6 +395,21 @@
 }
 .py-4 {
   padding-block: calc(var(--spacing) * 4);
+}
+.py-4\! {
+  padding-block: calc(var(--spacing) * 4) !important;
+}
+.py-6 {
+  padding-block: calc(var(--spacing) * 6);
+}
+.py-6\! {
+  padding-block: calc(var(--spacing) * 6) !important;
+}
+.py-8 {
+  padding-block: calc(var(--spacing) * 8);
+}
+.py-8\! {
+  padding-block: calc(var(--spacing) * 8) !important;
 }
 .text-center {
   text-align: center;
@@ -402,6 +428,14 @@
 .text-5xl {
   font-size: var(--text-5xl);
   line-height: var(--tw-leading, var(--text-5xl--line-height));
+}
+.text-base {
+  font-size: var(--text-base);
+  line-height: var(--tw-leading, var(--text-base--line-height));
+}
+.text-base\! {
+  font-size: var(--text-base) !important;
+  line-height: var(--tw-leading, var(--text-base--line-height)) !important;
 }
 .text-lg {
   font-size: var(--text-lg);
