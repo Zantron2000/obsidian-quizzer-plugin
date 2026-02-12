@@ -40,6 +40,12 @@ const buildHTML = (el: HTMLElement | SVGElement, data: HtmlRenderData[]) => {
 		if (item.clickHandler) {
 			childEl.addEventListener("click", item.clickHandler);
 		}
+		if (item.inputHandler !== null && childEl instanceof HTMLInputElement) {
+			childEl.addEventListener("input", (e) => {
+				const target = e.target as HTMLInputElement;
+				item.inputHandler!(target.value);
+			});
+		}
 
 		if (item.children.length > 0) {
 			buildHTML(childEl, item.children);

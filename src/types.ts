@@ -36,6 +36,7 @@ export interface HtmlRenderData {
 	children: HtmlRenderData[];
 	id?: string;
 	clickHandler?: () => void;
+	inputHandler?: (value: string) => void;
 	attrs?: {
 		[key: string]: string | number | boolean | null;
 	};
