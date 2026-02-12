@@ -4,6 +4,7 @@ import buildHTML from "view/buildHTML";
 import ErrorManager from "./errorManager";
 import ResultsManager from "./resultsManager";
 import TFManager from "./tfManager";
+import SAManager from "./saManager";
 
 export class QuizManager {
 	questionManagers: QuestionManager[] = [];
@@ -52,6 +53,9 @@ export class QuizManager {
 				} else if (TFManager.isTrueFalseQuestion(questionData)) {
 					const tfManager = new TFManager(questionData);
 					this.questionManagers.push(tfManager);
+				} else if (SAManager.isShortAnswerQuestion(questionData)) {
+					const saManager = new SAManager(questionData);
+					this.questionManagers.push(saManager);
 				}
 			});
 		}

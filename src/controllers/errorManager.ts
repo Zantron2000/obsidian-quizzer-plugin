@@ -3,6 +3,7 @@ import MCManager from "./mcManager";
 import { ErrorMessage, HtmlRenderData } from "types";
 import buildHTML from "view/buildHTML";
 import TFManager from "./tfManager";
+import SAManager from "./saManager";
 
 export default class ErrorManager {
 	private static quizzSchema = {
@@ -20,7 +21,14 @@ export default class ErrorManager {
 					properties: {
 						type: {
 							type: "string",
-							enum: ["multiple-choice", "mc", "true-false", "tf"],
+							enum: [
+								"multiple-choice",
+								"mc",
+								"true-false",
+								"tf",
+								"short-answer",
+								"sa",
+							],
 						},
 					},
 				},
@@ -95,7 +103,10 @@ export default class ErrorManager {
 					required: ["label"],
 					properties: {
 						label: { type: "string", format: "non-empty-string" },
-						explanation: { type: "string" },
+						explanation: {
+							type: "string",
+							format: "non-empty-string",
+						},
 					},
 				},
 			},
@@ -161,6 +172,22 @@ export default class ErrorManager {
 
 							if (!tfValidationResult.valid) {
 								tfValidationResult.errors.forEach((error) => {
+									const { message, property } = error;
+									errors.push({
+										questionIndex: index,
+										path: property,
+										message: message,
+									});
+								});
+							}
+						} else if (SAManager.isShortAnswerQuestion(question)) {
+							const saValidationResult = validator.validate(
+								question,
+								ErrorManager.shortAnswerSchema,
+							);
+
+							if (!saValidationResult.valid) {
+								saValidationResult.errors.forEach((error) => {
 									const { message, property } = error;
 									errors.push({
 										questionIndex: index,
