@@ -59,6 +59,8 @@ export class QuizManager {
 				}
 			});
 		}
+
+		this.questionManagers = QuizManager.shuffle(this.questionManagers);
 	}
 
 	#buildStartMenu(): HtmlRenderData[] {
