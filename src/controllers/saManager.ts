@@ -55,7 +55,9 @@ export default class SAManager implements QuestionManager {
 		this.input = value;
 	}
 
-	private generateFeedbackElement(): HtmlRenderData {
+	private generateFeedbackElement(
+		progressCallback: (isCorrect: boolean) => void,
+	): HtmlRenderData {
 		if (!this.submitted) {
 			return {
 				tag: "div",
@@ -117,7 +119,7 @@ export default class SAManager implements QuestionManager {
 				text: "Actually I was Correct",
 				class: "clickable-icon flex items-center gap-2 px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white text-sm rounded-lg transition-colors",
 				clickHandler: () => {
-					console.log("User indicated they were correct");
+					progressCallback(true);
 				},
 				children: [generateRefreshSVG("w-4 h-4")],
 			});
@@ -203,7 +205,7 @@ export default class SAManager implements QuestionManager {
 							},
 						],
 					},
-					this.generateFeedbackElement(),
+					this.generateFeedbackElement(progressCallback),
 				],
 			},
 			// Navigation
