@@ -1,5 +1,8 @@
 import { HtmlRenderData, QuestionManager, ShortAnswerData } from "types";
 import buildHTML from "view/buildHTML";
+import generateCheckSVG from "view/svgs/generateCheckSVG";
+import generateRefreshSVG from "view/svgs/generateRefreshSVG";
+import generateXSVG from "view/svgs/generateXSVG";
 
 export default class SAManager implements QuestionManager {
 	static SHORT_ANSWER_TYPES = ["short-answer", "sa"];
@@ -52,6 +55,112 @@ export default class SAManager implements QuestionManager {
 		this.input = value;
 	}
 
+	private generateFeedbackElement(): HtmlRenderData {
+		if (!this.submitted) {
+			return {
+				tag: "div",
+				children: [],
+			};
+		}
+
+		const isCorrect = this.isRightAnswer(this.input);
+		const triedToAnswer = this.input !== null && this.input.trim() !== "";
+
+		const feedback: HtmlRenderData[] = [
+			{
+				tag: "div",
+				class: "text-sm text-gray-700 mb-3",
+				children: [
+					{
+						tag: "div",
+						class: "mb-1",
+						children: triedToAnswer
+							? [
+									{
+										tag: "span",
+										text: "Your answer: ",
+										class: "text-gray-600",
+										children: [],
+									},
+									{
+										tag: "span",
+										text: `${this.input}`,
+										class: "font-medium",
+										children: [],
+									},
+								]
+							: [],
+					},
+					{
+						tag: "div",
+						children: [
+							{
+								tag: "span",
+								text: "Correct answer: ",
+								class: "text-gray-600",
+								children: [],
+							},
+							{
+								tag: "span",
+								text: this.data.answer,
+								class: "font-medium",
+								children: [],
+							},
+						],
+					},
+				],
+			},
+		];
+		if (triedToAnswer) {
+			feedback.push({
+				tag: "button",
+				text: "Actually I was Correct",
+				class: "clickable-icon flex items-center gap-2 px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white text-sm rounded-lg transition-colors",
+				clickHandler: () => {
+					console.log("User indicated they were correct");
+				},
+				children: [generateRefreshSVG("w-4 h-4")],
+			});
+		}
+
+		return {
+			tag: "div",
+			class: `rounded-lg p-4 mb-6 border-2 ${isCorrect ? "border-green-200 bg-green-50" : "border-amber-200 bg-amber-50"}`,
+			children: [
+				{
+					tag: "div",
+					class: "flex items-start gap-3",
+					children: [
+						{
+							tag: "div",
+							class: `w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 ${isCorrect ? "bg-green-100" : "bg-amber-100"}`,
+							children: [
+								isCorrect
+									? generateCheckSVG("w-4 h-4 text-green-600")
+									: generateXSVG("w-4 h-4 text-amber-600"),
+							],
+						},
+						{
+							tag: "div",
+							class: "flex-1",
+							children: [
+								{
+									tag: "div",
+									text: isCorrect
+										? "Correct!"
+										: "Your answer was marked incorrect",
+									class: `mb-2 ${isCorrect ? "text-green-900" : "text-amber-900"}`,
+									children: [],
+								},
+								...(isCorrect ? [] : feedback),
+							],
+						},
+					],
+				},
+			],
+		};
+	}
+
 	public reset(): void {
 		this.submitted = false;
 		this.input = null;
@@ -94,99 +203,7 @@ export default class SAManager implements QuestionManager {
 							},
 						],
 					},
-					{
-						tag: "div",
-						class: `rounded-lg p-4 mb-6 bg-amber-50 border-2 border-amber-200 ${this.submitted && !this.isRightAnswer(this.input) ? "block" : "hidden"}`,
-						children: [
-							{
-								tag: "div",
-								class: "flex items-start gap-3",
-								children: [
-									{
-										tag: "div",
-										class: "w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 bg-amber-100",
-										children: [
-											{
-												tag: "span",
-												text: "✖",
-												class: "w-4 h-4 text-amber-600",
-												children: [],
-											},
-										],
-									},
-									{
-										tag: "div",
-										class: "flex-1",
-										children: [
-											{
-												tag: "div",
-												text: "Your answer was marked incorrect",
-												class: "mb-2 text-amber-900",
-												children: [],
-											},
-											{
-												tag: "div",
-												class: "text-sm text-gray-700 mb-3",
-												children: [
-													{
-														tag: "div",
-														class: "mb-1",
-														children: [
-															{
-																tag: "span",
-																text: "Your answer:",
-																class: "text-gray-600",
-																children: [],
-															},
-															{
-																tag: "span",
-																text: " user-submitted-answer",
-																class: "font-medium",
-																children: [],
-															},
-														],
-													},
-													{
-														tag: "div",
-														children: [
-															{
-																tag: "span",
-																text: "Correct answer:",
-																class: "text-gray-600",
-																children: [],
-															},
-															{
-																tag: "span",
-																text: " expected-correct-answer",
-																class: "font-medium",
-																children: [],
-															},
-														],
-													},
-												],
-											},
-											{
-												tag: "button",
-												text: "Actually I was Correct",
-												class: "flex items-center gap-2 px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white text-sm rounded-lg transition-colors",
-												clickHandler: () => {
-													/* dummy override handler */
-												},
-												children: [
-													{
-														tag: "span",
-														text: "⟳",
-														class: "w-4 h-4",
-														children: [],
-													},
-												],
-											},
-										],
-									},
-								],
-							},
-						],
-					},
+					this.generateFeedbackElement(),
 				],
 			},
 			// Navigation
@@ -200,17 +217,15 @@ export default class SAManager implements QuestionManager {
 							clickable-icon w-full flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-purple-600 hover:bg-purple-700 text-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors
 						`,
 						clickHandler: () => {
-							if (this.input !== null) {
-								if (!this.submitted) {
-									this.submitted = true;
-									this.render(container, progressCallback);
-								} else {
-									const isCorrect = this.isRightAnswer(
-										this.input,
-									);
+							if (!this.submitted) {
+								this.submitted = true;
+								this.render(container, progressCallback);
+							} else {
+								const isCorrect = this.isRightAnswer(
+									this.input,
+								);
 
-									progressCallback(isCorrect);
-								}
+								progressCallback(isCorrect);
 							}
 						},
 						children: [
