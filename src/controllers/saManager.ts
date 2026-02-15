@@ -182,7 +182,7 @@ export default class SAManager implements QuestionManager {
 				children: [
 					{
 						tag: "p",
-						text: "Sample question text",
+						text: this.data.question,
 						class: "text-xl mb-6 text-gray-900",
 						children: [],
 					},
