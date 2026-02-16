@@ -1,5 +1,6 @@
 import { Plugin, addIcon } from "obsidian";
 import { QuizManager } from "controllers/quizManager";
+import DailyQuizManager from "controllers/dailyQuizManager";
 
 export default class QuizzerPlugin extends Plugin {
 	async onload() {
@@ -17,6 +18,18 @@ export default class QuizzerPlugin extends Plugin {
 				}
 
 				const quizManager = new QuizManager(quizData, el);
+				quizManager.render();
+			},
+		);
+
+		this.registerMarkdownCodeBlockProcessor(
+			"daily-quiz",
+			async (source, el, ctx) => {
+				const quizManager = await DailyQuizManager.getQuizManager(
+					el,
+					this.app,
+				);
+
 				quizManager.render();
 			},
 		);
@@ -39,7 +52,7 @@ export default class QuizzerPlugin extends Plugin {
 				} else {
 					const file = await this.app.vault.create(
 						"Daily Quiz.md",
-						`\`\`\`daily-quiz\n\`\`\``,
+						`\`\`\`daily-quiz\n{}\n\`\`\``,
 					);
 
 					await leaf.openFile(file);
