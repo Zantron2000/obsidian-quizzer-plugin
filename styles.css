@@ -321,9 +321,6 @@
 .bg-gray-100 {
   background-color: var(--color-gray-100);
 }
-.bg-gray-200 {
-  background-color: var(--color-gray-200);
-}
 .bg-green-50 {
   background-color: var(--color-green-50);
 }
@@ -554,6 +551,12 @@
 .bg-accent-dark {
   background-color: hsl(	var(--accent-h),	var(--accent-s),	calc(var(--accent-l))	);
 }
+.bg-secondary {
+  background-color: var(--background-secondary);
+}
+.bg-secondary-alt {
+  background-color: var(--background-secondary-alt);
+}
 .text-accent {
   color: hsl(var(--accent-h), var(--accent-s), var(--accent-l));
 }
@@ -562,6 +565,12 @@
 }
 .text-accent-dark {
   color: hsl(var(--accent-h), var(--accent-s), calc(var(--accent-l) - 5%));
+}
+.text-muted {
+  color: var(--text-muted);
+}
+.text-on-accent {
+  color: var(--text-on-accent);
 }
 .hover\:bg-accent:hover {
   background-color: hsl(var(--accent-h), var(--accent-s), var(--accent-l));

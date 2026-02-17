@@ -23,6 +23,14 @@
 	);
 }
 
+.bg-secondary {
+	background-color: var(--background-secondary);
+}
+
+.bg-secondary-alt {
+	background-color: var(--background-secondary-alt);
+}
+
 .text-accent {
 	color: hsl(var(--accent-h), var(--accent-s), var(--accent-l));
 }
@@ -33,6 +41,14 @@
 
 .text-accent-dark {
 	color: hsl(var(--accent-h), var(--accent-s), calc(var(--accent-l) - 5%));
+}
+
+.text-muted {
+	color: var(--text-muted);
+}
+
+.text-on-accent {
+	color: var(--text-on-accent);
 }
 
 .hover\:bg-accent:hover {

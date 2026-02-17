@@ -13,7 +13,7 @@ export class QuizManager {
 	container: HTMLElement;
 	htmlContainer: HtmlRenderData = {
 		tag: "div",
-		class: "bg-white rounded-lg shadow-lg p-8 border border-gray-200",
+		class: "bg-secondary rounded-lg shadow-lg p-8",
 		children: [],
 	};
 	errorManager: ErrorManager;
@@ -111,13 +111,12 @@ export class QuizManager {
 					},
 					{
 						tag: "p",
-						class: "text-3xl mb-2 text-gray-900",
+						class: "text-3xl mb-2",
 						text: "Multiple Choice Quiz",
 						children: [],
 					},
 					{
 						tag: "p",
-						class: "text-gray-600",
 						text: "Test your knowledge with interactive questions",
 						children: [],
 					},
@@ -130,17 +129,17 @@ export class QuizManager {
 				children: [
 					{
 						tag: "div",
-						class: "bg-gray-50 rounded-lg p-4 text-center",
+						class: "bg-secondary-alt rounded-lg p-4 text-center",
 						children: [
 							{
 								tag: "div",
-								class: "text-2xl mb-1 text-gray-900",
+								class: "text-2xl mb-1",
 								text: this.questionManagers.length.toString(),
 								children: [],
 							},
 							{
 								tag: "div",
-								class: "text-sm text-gray-600",
+								class: "text-sm text-muted",
 								text: "Questions",
 								children: [],
 							},
@@ -148,11 +147,11 @@ export class QuizManager {
 					},
 					{
 						tag: "div",
-						class: "bg-gray-50 rounded-lg p-4 text-center",
+						class: "bg-secondary-alt rounded-lg p-4 text-center",
 						children: [
 							{
 								tag: "div",
-								class: "text-2xl mb-1 text-gray-900",
+								class: "text-2xl mb-1",
 								text: Math.ceil(
 									this.questionManagers.length / 2,
 								).toString(),
@@ -160,7 +159,7 @@ export class QuizManager {
 							},
 							{
 								tag: "div",
-								class: "text-sm text-gray-600",
+								class: "text-sm text-muted",
 								text: "Minutes",
 								children: [],
 							},
@@ -168,7 +167,7 @@ export class QuizManager {
 					},
 					{
 						tag: "div",
-						class: "bg-gray-50 rounded-lg p-4 text-center",
+						class: "bg-secondary-alt rounded-lg p-4 text-center",
 						children: [
 							{
 								tag: "div",
@@ -233,7 +232,7 @@ export class QuizManager {
 									},
 									{
 										tag: "div",
-										class: "text-2xl text-gray-900",
+										class: "text-2xl",
 										text: "N/A",
 										children: [],
 									},
@@ -241,7 +240,7 @@ export class QuizManager {
 							},
 							{
 								tag: "div",
-								class: "text-sm text-gray-600",
+								class: "text-sm text-muted",
 								text: "Best Score",
 								children: [],
 							},
@@ -252,17 +251,17 @@ export class QuizManager {
 			// Instructions
 			{
 				tag: "div",
-				class: "bg-blue-50 border border-blue-200 rounded-lg p-4 mb-8",
+				class: "bg-secondary-alt border border-blue-200 rounded-lg p-4 mb-8",
 				children: [
 					{
 						tag: "p",
-						class: "text-sm mb-2 text-gray-900",
+						class: "text-sm mb-2",
 						text: "Instructions:",
 						children: [],
 					},
 					{
 						tag: "ul",
-						class: "text-sm text-gray-700 space-y-1",
+						class: "text-sm text-muted space-y-1",
 						children: [
 							{
 								tag: "li",
@@ -286,7 +285,7 @@ export class QuizManager {
 			// Start Button
 			{
 				tag: "button",
-				class: "cursor-pointer w-full bg-accent hover:bg-accent-dark text-white hover:text-white py-4 rounded-lg flex items-center justify-center gap-2 clickable-icon transition-colors",
+				class: "cursor-pointer w-full bg-accent hover:bg-accent-dark text-on-accent py-4 rounded-lg flex items-center justify-center gap-2 clickable-icon transition-colors",
 				clickHandler: () => {
 					this.showStartMenu = false;
 					this.render();
@@ -362,13 +361,13 @@ export class QuizManager {
 							children: [
 								{
 									tag: "span",
-									class: "text-sm text-gray-600",
+									class: "text-sm text-muted",
 									text: `Question ${this.questionIndex + 1} of ${this.questionManagers.length}`,
 									children: [],
 								},
 								{
 									tag: "span",
-									class: "text-sm text-gray-600",
+									class: "text-sm text-muted",
 									text: `${this.questionIndex} answered`,
 									children: [],
 								},
@@ -376,11 +375,11 @@ export class QuizManager {
 						},
 						{
 							tag: "div",
-							class: "w-full bg-gray-200 rounded-full h-2",
+							class: "w-full bg-secondary-alt rounded-full h-2",
 							children: [
 								{
 									tag: "div",
-									class: "bg-purple-600 h-2 rounded-full transition-all",
+									class: "bg-accent h-2 rounded-full transition-all",
 									attrs: {
 										style: `width: ${((this.questionIndex + 1) / this.questionManagers.length) * 100}%`,
 									},
