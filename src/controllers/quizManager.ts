@@ -80,7 +80,7 @@ export class QuizManager {
 								children: [
 									{
 										tag: "svg",
-										class: "w-8 h-8 text-accent",
+										class: "w-8 h-8 text-accent-dark",
 										attrs: {
 											xmlns: "http://www.w3.org/2000/svg",
 											viewBox: "0 0 24 24",
@@ -353,7 +353,7 @@ export class QuizManager {
 				// Progress Bar
 				{
 					tag: "div",
-					class: "p-4 border-b border-gray-200",
+					class: "p-4 border-b border-modifier",
 					children: [
 						{
 							tag: "div",

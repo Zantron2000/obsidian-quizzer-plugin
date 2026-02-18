@@ -71,7 +71,7 @@ export default class MCManager implements QuestionManager {
 						},
 						{
 							tag: "span",
-							class: "text-lg text-gray-900",
+							class: "text-lg",
 							text: this.options[optionIdx]?.label,
 							children: [],
 						},
@@ -84,19 +84,19 @@ export default class MCManager implements QuestionManager {
 	private getOptionClasses(optionIdx: number): string {
 		if (this.submitted === false) {
 			if (this.selectedIdx === optionIdx) {
-				return "border-purple-600 bg-purple-50";
+				return "border-accent";
 			} else {
-				return "border-gray-200 hover:border-gray-300 bg-white";
+				return "border-modifier hover:border-modifier-hover bg-secondary-alt";
 			}
 		} else {
 			const isAnswer = this.isRightAnswer(optionIdx);
 
 			if (isAnswer) {
-				return "border-green-600 bg-green-50";
+				return "border-green-600";
 			} else if (optionIdx === this.selectedIdx) {
-				return "border-red-600 bg-red-50";
+				return "border-red-600";
 			} else {
-				return "border-gray-200 bg-white opacity-50";
+				return "border-modifier opacity-50";
 			}
 		}
 	}
@@ -104,9 +104,9 @@ export default class MCManager implements QuestionManager {
 	private getOptionBubbleClasses(optionIdx: number): string {
 		if (this.submitted === false) {
 			if (this.selectedIdx === optionIdx) {
-				return "border-purple-600 bg-purple-600";
+				return "border-accent bg-accent";
 			} else {
-				return "border-gray-300 bg-white";
+				return "border-modifier bg-secondary";
 			}
 		} else {
 			const isAnswer = this.isRightAnswer(optionIdx);
@@ -116,7 +116,7 @@ export default class MCManager implements QuestionManager {
 			} else if (optionIdx === this.selectedIdx) {
 				return "border-red-600 bg-red-600";
 			} else {
-				return "border-gray-300 bg-white";
+				return "border-modifier";
 			}
 		}
 	}
@@ -195,7 +195,7 @@ export default class MCManager implements QuestionManager {
 			tag: "div",
 			class: `
 			  rounded-lg px-4 py-2 mb-2
-				${isCorrect ? "bg-green-50 border-2 border-green-200" : "bg-red-50 border-2 border-red-200"}
+				${isCorrect ? "border-2 border-green-200" : "border-2 border-red-200"}
 				${explanation ? "block" : "hidden"}
 			`,
 			children: [
@@ -216,13 +216,13 @@ export default class MCManager implements QuestionManager {
 							children: [
 								{
 									tag: "div",
-									class: `mb-2 ${isCorrect ? "text-green-900" : "text-red-900"}`,
+									class: `mb-2 ${isCorrect ? "text-green-600" : "text-red-600"}`,
 									text: isCorrect ? "Correct!" : "Incorrect",
 									children: [],
 								},
 								{
 									tag: "div",
-									class: "text-sm text-gray-700",
+									class: "text-sm text-muted",
 									text: explanation,
 									children: [],
 								},
@@ -254,7 +254,7 @@ export default class MCManager implements QuestionManager {
 				children: [
 					{
 						tag: "p",
-						class: "text-xl mb-6 text-gray-900",
+						class: "text-xl mb-6",
 						text: this.data.question,
 						children: [],
 					},
@@ -273,7 +273,7 @@ export default class MCManager implements QuestionManager {
 			// Navigation
 			{
 				tag: "div",
-				class: "p-4 border-t border-gray-200",
+				class: "p-4 border-t border-modifier",
 				children: [
 					{
 						tag: "button",
@@ -282,7 +282,7 @@ export default class MCManager implements QuestionManager {
 								? { disabled: "true" }
 								: {},
 						class: `
-							clickable-icon w-full flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-purple-600 hover:bg-purple-700 text-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors
+							clickable-icon w-full flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-purple-600 hover:bg-purple-700 text-on-accent disabled:opacity-50 disabled:cursor-not-allowed transition-colors
 						`,
 						clickHandler: () => {
 							if (this.selectedIdx !== null) {

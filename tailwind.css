@@ -51,6 +51,18 @@
 	color: var(--text-on-accent);
 }
 
+.border-modifier {
+	border-color: var(--background-modifier-border);
+}
+
+.hover\:border-modifier-hover:hover {
+	border-color: var(--background-modifier-border-hover);
+}
+
+.border-accent {
+	border-color: hsl(var(--accent-h), var(--accent-s), var(--accent-l));
+}
+
 .hover\:bg-accent:hover {
 	background-color: hsl(var(--accent-h), var(--accent-s), var(--accent-l));
 }
