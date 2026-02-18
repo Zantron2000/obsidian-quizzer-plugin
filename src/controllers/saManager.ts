@@ -71,7 +71,7 @@ export default class SAManager implements QuestionManager {
 		const feedback: HtmlRenderData[] = [
 			{
 				tag: "div",
-				class: "text-sm text-gray-700 mb-3",
+				class: "text-sm mb-3",
 				children: [
 					{
 						tag: "div",
@@ -81,7 +81,7 @@ export default class SAManager implements QuestionManager {
 									{
 										tag: "span",
 										text: "Your answer: ",
-										class: "text-gray-600",
+										class: "text-muted",
 										children: [],
 									},
 									{
@@ -99,7 +99,7 @@ export default class SAManager implements QuestionManager {
 							{
 								tag: "span",
 								text: "Correct answer: ",
-								class: "text-gray-600",
+								class: "text-muted",
 								children: [],
 							},
 							{
@@ -127,7 +127,7 @@ export default class SAManager implements QuestionManager {
 
 		return {
 			tag: "div",
-			class: `rounded-lg p-4 mb-6 border-2 ${isCorrect ? "border-green-200 bg-green-50" : "border-amber-200 bg-amber-50"}`,
+			class: `rounded-lg p-4 mb-6 border-2 ${isCorrect ? "border-green-200" : "border-amber-200"}`,
 			children: [
 				{
 					tag: "div",
@@ -144,14 +144,14 @@ export default class SAManager implements QuestionManager {
 						},
 						{
 							tag: "div",
-							class: "flex-1",
+							class: "flex-1 text-muted",
 							children: [
 								{
 									tag: "div",
 									text: isCorrect
 										? "Correct!"
 										: "Your answer was marked incorrect",
-									class: `mb-2 ${isCorrect ? "text-green-900" : "text-amber-900"}`,
+									class: `mb-2 ${isCorrect ? "text-green-600" : "text-amber-600"}`,
 									children: [],
 								},
 								...(isCorrect ? [] : feedback),
@@ -183,7 +183,7 @@ export default class SAManager implements QuestionManager {
 					{
 						tag: "p",
 						text: this.data.question,
-						class: "text-xl mb-6 text-gray-900",
+						class: "text-xl mb-6",
 						children: [],
 					},
 					{
@@ -211,7 +211,7 @@ export default class SAManager implements QuestionManager {
 			// Navigation
 			{
 				tag: "div",
-				class: "p-4 border-t border-gray-200",
+				class: "p-4 border-t border-modifier",
 				children: [
 					{
 						tag: "button",
