@@ -55,7 +55,7 @@ export default class TFManager implements QuestionManager {
 						},
 						{
 							tag: "span",
-							class: "text-lg text-gray-900",
+							class: "text-lg",
 							text: label ? "True" : "False",
 							children: [],
 						},
@@ -68,19 +68,19 @@ export default class TFManager implements QuestionManager {
 	private getOptionClasses(label: boolean): string {
 		if (this.submitted === false) {
 			if (this.selected === label) {
-				return "border-purple-600 bg-purple-50";
+				return "border-accent";
 			} else {
-				return "border-gray-200 hover:border-gray-300 bg-white";
+				return "border-modifier hover:border-modifier-hover bg-secondary-alt";
 			}
 		} else {
 			const isAnswer = this.isRightAnswer(label);
 
 			if (isAnswer) {
-				return "border-green-600 bg-green-50";
+				return "border-green-600";
 			} else if (label === this.selected) {
-				return "border-red-600 bg-red-50";
+				return "border-red-600";
 			} else {
-				return "border-gray-200 bg-white opacity-50";
+				return "border-modifier opacity-50";
 			}
 		}
 	}
@@ -88,9 +88,9 @@ export default class TFManager implements QuestionManager {
 	private getOptionBubbleClasses(label: boolean): string {
 		if (this.submitted === false) {
 			if (this.selected === label) {
-				return "border-purple-600 bg-purple-600";
+				return "border-accent bg-accent";
 			} else {
-				return "border-gray-300 bg-white";
+				return "border-modifier bg-secondary";
 			}
 		} else {
 			const isAnswer = this.isRightAnswer(label);
@@ -100,7 +100,7 @@ export default class TFManager implements QuestionManager {
 			} else if (label === this.selected) {
 				return "border-red-600 bg-red-600";
 			} else {
-				return "border-gray-300 bg-white";
+				return "border-modifier";
 			}
 		}
 	}
@@ -181,7 +181,7 @@ export default class TFManager implements QuestionManager {
 			tag: "div",
 			class: `
 			  rounded-lg px-4 py-2 mb-2
-				${isCorrect ? "bg-green-50 border-2 border-green-200" : "bg-red-50 border-2 border-red-200"}
+				${isCorrect ? "border-2 border-green-200" : "border-2 border-red-200"}
 				${explanation ? "block" : "hidden"}
 			`,
 			children: [
@@ -202,13 +202,13 @@ export default class TFManager implements QuestionManager {
 							children: [
 								{
 									tag: "div",
-									class: `mb-2 ${isCorrect ? "text-green-900" : "text-red-900"}`,
+									class: `mb-2 ${isCorrect ? "text-green-600" : "text-red-600"}`,
 									text: isCorrect ? "Correct!" : "Incorrect",
 									children: [],
 								},
 								{
 									tag: "div",
-									class: "text-sm text-gray-700",
+									class: "text-sm text-muted",
 									text: explanation,
 									children: [],
 								},
@@ -239,7 +239,7 @@ export default class TFManager implements QuestionManager {
 				children: [
 					{
 						tag: "p",
-						class: "text-xl mb-6 text-gray-900",
+						class: "text-xl mb-6",
 						text: this.data.question,
 						children: [],
 					},
@@ -267,7 +267,7 @@ export default class TFManager implements QuestionManager {
 			// Navigation
 			{
 				tag: "div",
-				class: "p-4 border-t border-gray-200",
+				class: "p-4 border-t border-modifier",
 				children: [
 					{
 						tag: "button",

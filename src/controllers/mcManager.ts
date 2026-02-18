@@ -194,8 +194,8 @@ export default class MCManager implements QuestionManager {
 		return {
 			tag: "div",
 			class: `
-			  rounded-lg px-4 py-2 mb-2
-				${isCorrect ? "border-2 border-green-200" : "border-2 border-red-200"}
+			  rounded-lg px-4 py-2 mb-2 border-2
+				${isCorrect ? "border-green-200" : "border-red-200"}
 				${explanation ? "block" : "hidden"}
 			`,
 			children: [
@@ -282,7 +282,7 @@ export default class MCManager implements QuestionManager {
 								? { disabled: "true" }
 								: {},
 						class: `
-							clickable-icon w-full flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-purple-600 hover:bg-purple-700 text-on-accent disabled:opacity-50 disabled:cursor-not-allowed transition-colors
+							clickable-icon w-full flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-accent hover:bg-accent-dark text-on-accent disabled:opacity-50 disabled:cursor-not-allowed transition-colors
 						`,
 						clickHandler: () => {
 							if (this.selectedIdx !== null) {
