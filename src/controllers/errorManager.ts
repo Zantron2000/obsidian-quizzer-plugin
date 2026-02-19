@@ -5,6 +5,7 @@ import buildHTML from "view/buildHTML";
 import TFManager from "./tfManager";
 import SAManager from "./saManager";
 import generateParagraph from "view/html/generateParagraph";
+import generateListItem from "view/html/generateListItem";
 
 export default class ErrorManager {
 	private static quizzSchema = {
@@ -430,26 +431,18 @@ export default class ErrorManager {
 								tag: "ul",
 								class: "text-sm text-muted space-y-1",
 								children: [
-									{
-										tag: "li",
-										text: "Review your quiz JSON configuration file",
-										children: [],
-									},
-									{
-										tag: "li",
-										text: "Ensure all required properties are present",
-										children: [],
-									},
-									{
-										tag: "li",
-										text: "Verify that property types match the expected format",
-										children: [],
-									},
-									{
-										tag: "li",
-										text: "Check for typos in property names",
-										children: [],
-									},
+									generateListItem(
+										"Review your quiz JSON configuration file",
+									),
+									generateListItem(
+										"Ensure all required properties are present",
+									),
+									generateListItem(
+										"Verify that property types match the expected format",
+									),
+									generateListItem(
+										"Check for typos in property names",
+									),
 								],
 							},
 						],

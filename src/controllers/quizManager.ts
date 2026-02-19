@@ -8,6 +8,7 @@ import SAManager from "./saManager";
 import generateBookSVG from "view/svgs/generateBookSVG";
 import generateTrophySVG from "view/svgs/generateTrophySVG";
 import generateParagraph from "view/html/generateParagraph";
+import generateListItem from "view/html/generateListItem";
 
 export class QuizManager {
 	questionManagers: QuestionManager[] = [];
@@ -157,21 +158,15 @@ export class QuizManager {
 						tag: "ul",
 						class: "text-sm text-muted space-y-1",
 						children: [
-							{
-								tag: "li",
-								text: "Select the best answer for each question",
-								children: [],
-							},
-							{
-								tag: "li",
-								text: "You can navigate between questions freely",
-								children: [],
-							},
-							{
-								tag: "li",
-								text: "Submit your answers when you're ready",
-								children: [],
-							},
+							generateListItem(
+								"Select the best answer for each question",
+							),
+							generateListItem(
+								"Submit your answer when you're ready",
+							),
+							generateListItem(
+								"Get instant feedback and see your final results at the end",
+							),
 						],
 					},
 				],
