@@ -7,6 +7,7 @@ import TFManager from "./tfManager";
 import SAManager from "./saManager";
 import generateBookSVG from "view/svgs/generateBookSVG";
 import generateTrophySVG from "view/svgs/generateTrophySVG";
+import generateParagraph from "view/html/generateParagraph";
 
 export class QuizManager {
 	questionManagers: QuestionManager[] = [];
@@ -85,17 +86,11 @@ export class QuizManager {
 							},
 						],
 					},
-					{
-						tag: "p",
-						class: "text-3xl mb-2",
-						text: "Multiple Choice Quiz",
-						children: [],
-					},
-					{
-						tag: "p",
-						text: "Test your knowledge with interactive questions",
-						children: [],
-					},
+					generateParagraph("Multiple Choice Quiz", "text-3xl mb-2"),
+					generateParagraph(
+						"Test your knowledge with interactive questions",
+						"",
+					),
 				],
 			},
 			// Stats
@@ -107,38 +102,27 @@ export class QuizManager {
 						tag: "div",
 						class: "bg-secondary-alt rounded-lg p-4 text-center",
 						children: [
-							{
-								tag: "div",
-								class: "text-2xl mb-1",
-								text: this.questionManagers.length.toString(),
-								children: [],
-							},
-							{
-								tag: "div",
-								class: "text-sm text-muted",
-								text: "Questions",
-								children: [],
-							},
+							generateParagraph(
+								this.questionManagers.length.toString(),
+								"text-2xl mb-1",
+							),
+							generateParagraph(
+								"Questions",
+								"text-sm text-muted",
+							),
 						],
 					},
 					{
 						tag: "div",
 						class: "bg-secondary-alt rounded-lg p-4 text-center",
 						children: [
-							{
-								tag: "div",
-								class: "text-2xl mb-1",
-								text: Math.ceil(
+							generateParagraph(
+								Math.ceil(
 									this.questionManagers.length / 2,
 								).toString(),
-								children: [],
-							},
-							{
-								tag: "div",
-								class: "text-sm text-muted",
-								text: "Minutes",
-								children: [],
-							},
+								"text-2xl mb-1",
+							),
+							generateParagraph("Minutes", "text-sm text-muted"),
 						],
 					},
 					{
@@ -152,20 +136,13 @@ export class QuizManager {
 									generateTrophySVG(
 										"w-5 h-5 text-yellow-500",
 									),
-									{
-										tag: "div",
-										class: "text-2xl",
-										text: "N/A",
-										children: [],
-									},
+									generateParagraph("N/A", "text-2xl"),
 								],
 							},
-							{
-								tag: "div",
-								class: "text-sm text-muted",
-								text: "Best Score",
-								children: [],
-							},
+							generateParagraph(
+								"Best Score",
+								"text-sm text-muted",
+							),
 						],
 					},
 				],
@@ -175,12 +152,7 @@ export class QuizManager {
 				tag: "div",
 				class: "bg-secondary-alt border border-blue-200 rounded-lg p-4 mb-8",
 				children: [
-					{
-						tag: "p",
-						class: "text-sm mb-2",
-						text: "Instructions:",
-						children: [],
-					},
+					generateParagraph("Instructions:", "text-sm mb-2"),
 					{
 						tag: "ul",
 						class: "text-sm text-muted space-y-1",

@@ -1,11 +1,11 @@
 import { HtmlRenderData } from "types";
 
-export default function generateBookSVG(
-	className: string,
+export default function generateParagraph(
 	text: string,
+	className: string,
 ): HtmlRenderData {
 	return {
-		tag: "svg",
+		tag: "p",
 		class: className,
 		text,
 		children: [],

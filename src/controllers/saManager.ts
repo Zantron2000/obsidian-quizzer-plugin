@@ -1,5 +1,6 @@
 import { HtmlRenderData, QuestionManager, ShortAnswerData } from "types";
 import buildHTML from "view/buildHTML";
+import generateParagraph from "view/html/generateParagraph";
 import generateCheckSVG from "view/svgs/generateCheckSVG";
 import generateRefreshSVG from "view/svgs/generateRefreshSVG";
 import generateXSVG from "view/svgs/generateXSVG";
@@ -146,14 +147,12 @@ export default class SAManager implements QuestionManager {
 							tag: "div",
 							class: "flex-1 text-muted",
 							children: [
-								{
-									tag: "div",
-									text: isCorrect
+								generateParagraph(
+									isCorrect
 										? "Correct!"
 										: "Your answer was marked incorrect",
-									class: `mb-2 ${isCorrect ? "text-green-600" : "text-amber-600"}`,
-									children: [],
-								},
+									`mb-2 ${isCorrect ? "text-green-600" : "text-amber-600"}`,
+								),
 								...(isCorrect ? [] : feedback),
 							],
 						},
@@ -180,12 +179,7 @@ export default class SAManager implements QuestionManager {
 				tag: "div",
 				class: "p-8",
 				children: [
-					{
-						tag: "p",
-						text: this.data.question,
-						class: "text-xl mb-6",
-						children: [],
-					},
+					generateParagraph(this.data.question, "text-xl mb-6"),
 					{
 						tag: "div",
 						class: "mb-6",

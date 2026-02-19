@@ -1,5 +1,6 @@
 import { HtmlRenderData } from "types";
 import buildHTML from "view/buildHTML";
+import generateParagraph from "view/html/generateParagraph";
 import generateCheckSVG from "view/svgs/generateCheckSVG";
 import generateXSVG from "view/svgs/generateXSVG";
 
@@ -54,18 +55,8 @@ export default class ResultsManager {
 						class: "w-24 h-24 mx-auto mb-4 text-accent-light rounded-full flex items-center justify-center",
 						children: [generateCheckSVG("w-12 h-12 text-accent")],
 					},
-					{
-						tag: "p",
-						class: "text-3xl mb-2",
-						text: "Quiz Complete!",
-						children: [],
-					},
-					{
-						tag: "p",
-						class: "text-muted",
-						text: "Here are your results",
-						children: [],
-					},
+					generateParagraph("Quiz Complete!", "text-3xl mb-2"),
+					generateParagraph("Here are your results", "text-muted"),
 				],
 			},
 			// Score Box
@@ -73,12 +64,10 @@ export default class ResultsManager {
 				tag: "div",
 				class: "bg-secondary-alt rounded-lg p-6 mb-8 text-center",
 				children: [
-					{
-						tag: "div",
-						class: "text-5xl mb-2 text-accent",
-						text: `${Math.round((correctQuestions.filter(Boolean).length / correctQuestions.length) * 100)}%`, // calculated percentage
-						children: [],
-					},
+					generateParagraph(
+						`${Math.round((correctQuestions.filter(Boolean).length / correctQuestions.length) * 100)}%`,
+						"text-5xl mb-2 text-accent",
+					),
 					{
 						tag: "div",
 						class: "text-muted",

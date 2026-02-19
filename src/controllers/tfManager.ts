@@ -1,5 +1,6 @@
 import { HtmlRenderData, QuestionManager, TrueFalseData } from "types";
 import buildHTML from "view/buildHTML";
+import generateParagraph from "view/html/generateParagraph";
 import generateCheckSVG from "view/svgs/generateCheckSVG";
 import generateXSVG from "view/svgs/generateXSVG";
 
@@ -151,18 +152,14 @@ export default class TFManager implements QuestionManager {
 						{
 							tag: "div",
 							children: [
-								{
-									tag: "div",
-									class: `mb-2 ${isCorrect ? "text-green-600" : "text-red-600"}`,
-									text: isCorrect ? "Correct!" : "Incorrect",
-									children: [],
-								},
-								{
-									tag: "div",
-									class: "text-sm text-muted",
-									text: explanation,
-									children: [],
-								},
+								generateParagraph(
+									isCorrect ? "Correct!" : "Incorrect",
+									`mb-2 ${isCorrect ? "text-green-600" : "text-red-600"}`,
+								),
+								generateParagraph(
+									explanation ?? "",
+									"text-sm text-muted",
+								),
 							],
 						},
 					],
@@ -188,12 +185,7 @@ export default class TFManager implements QuestionManager {
 				tag: "div",
 				class: "p-8",
 				children: [
-					{
-						tag: "p",
-						class: "text-xl mb-6",
-						text: this.data.question,
-						children: [],
-					},
+					generateParagraph(this.data.question, "text-xl mb-6"),
 					// Options
 					{
 						tag: "div",

@@ -4,6 +4,7 @@ import { ErrorMessage, HtmlRenderData } from "types";
 import buildHTML from "view/buildHTML";
 import TFManager from "./tfManager";
 import SAManager from "./saManager";
+import generateParagraph from "view/html/generateParagraph";
 
 export default class ErrorManager {
 	private static quizzSchema = {
@@ -295,21 +296,16 @@ export default class ErrorManager {
 							tag: "div",
 							class: "flex-1",
 							children: [
-								{
-									tag: "div",
-									class: "text-sm text-red-600 mb-1",
-									text:
-										error!.questionIndex == null
-											? "General Error"
-											: `Question ${error!.questionIndex + 1}`,
-									children: [],
-								},
-								{
-									tag: "div",
-									class: "text-xs font-mono text-muted mb-2 bg-secondary px-2 py-1 rounded inline-block",
-									text: error!.path,
-									children: [],
-								},
+								generateParagraph(
+									error!.questionIndex == null
+										? "General Error"
+										: `Question ${error!.questionIndex + 1}`,
+									"text-sm text-red-600 mb-1",
+								),
+								generateParagraph(
+									error!.path,
+									"text-xs font-mono text-muted mb-2 bg-secondary px-2 py-1 rounded inline-block",
+								),
 								{
 									tag: "div",
 									class: "text-sm",
@@ -398,18 +394,14 @@ export default class ErrorManager {
 							{
 								tag: "div",
 								children: [
-									{
-										tag: "p",
-										class: "text-2xl mb-1",
-										text: "Invalid Quiz Data",
-										children: [],
-									},
-									{
-										tag: "p",
-										class: "text-muted",
-										text: `Your quiz configuration contains ${this.errors.length} validation error(s) that must be fixed before proceeding.`,
-										children: [],
-									},
+									generateParagraph(
+										"Invalid Quiz Data",
+										"text-2xl mb-1",
+									),
+									generateParagraph(
+										`Your quiz configuration contains ${this.errors.length} validation error(s) that must be fixed before proceeding.`,
+										"text-sm text-muted",
+									),
 								],
 							},
 						],
@@ -433,12 +425,7 @@ export default class ErrorManager {
 						tag: "div",
 						class: "mt-6 bg-secondary-alt border border-blue-200 rounded-lg p-4",
 						children: [
-							{
-								tag: "p",
-								class: "text-sm mb-2",
-								text: "How to fix:",
-								children: [],
-							},
+							generateParagraph("How to fix:", "text-sm mb-2"),
 							{
 								tag: "ul",
 								class: "text-sm text-muted space-y-1",
