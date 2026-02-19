@@ -232,11 +232,6 @@ export default class SAManager implements QuestionManager {
 						},
 						children: [
 							{
-								tag: "svg",
-								class: "w-4 h-4",
-								children: [],
-							},
-							{
 								tag: "span",
 								text: this.submitted
 									? "Move On"

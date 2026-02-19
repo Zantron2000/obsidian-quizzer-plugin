@@ -5,6 +5,8 @@ import ErrorManager from "./errorManager";
 import ResultsManager from "./resultsManager";
 import TFManager from "./tfManager";
 import SAManager from "./saManager";
+import generateBookSVG from "view/svgs/generateBookSVG";
+import generateTrophySVG from "view/svgs/generateTrophySVG";
 
 export class QuizManager {
 	questionManagers: QuestionManager[] = [];
@@ -78,33 +80,7 @@ export class QuizManager {
 								tag: "div",
 								class: "w-16 h-16 bg-accent-light rounded-full flex items-center justify-center",
 								children: [
-									{
-										tag: "svg",
-										class: "w-8 h-8 text-accent-dark",
-										attrs: {
-											xmlns: "http://www.w3.org/2000/svg",
-											viewBox: "0 0 24 24",
-											fill: "none",
-											stroke: "currentColor",
-											"stroke-width": "2",
-											"stroke-linecap": "round",
-											"stroke-linejoin": "round",
-										},
-										children: [
-											{
-												tag: "path",
-												attrs: { d: "M12 7v14" },
-												children: [],
-											},
-											{
-												tag: "path",
-												attrs: {
-													d: "M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z",
-												},
-												children: [],
-											},
-										],
-									},
+									generateBookSVG("w-8 h-8 text-accent-dark"),
 								],
 							},
 						],
@@ -173,63 +149,9 @@ export class QuizManager {
 								tag: "div",
 								class: "flex items-center justify-center gap-1 mb-1",
 								children: [
-									{
-										tag: "svg",
-										class: "w-5 h-5 text-yellow-500",
-										attrs: {
-											xmlns: "http://www.w3.org/2000/svg",
-											width: "24",
-											height: "24",
-											viewBox: "0 0 24 24",
-											fill: "none",
-											stroke: "currentColor",
-											"stroke-width": "2",
-											"stroke-linecap": "round",
-											"stroke-linejoin": "round",
-										},
-										children: [
-											{
-												tag: "path",
-												attrs: {
-													d: "M10 14.66v1.626a2 2 0 0 1-.976 1.696A5 5 0 0 0 7 21.978",
-												},
-												children: [],
-											},
-											{
-												tag: "path",
-												attrs: {
-													d: "M14 14.66v1.626a2 2 0 0 0 .976 1.696A5 5 0 0 1 17 21.978",
-												},
-												children: [],
-											},
-											{
-												tag: "path",
-												attrs: {
-													d: "M18 9h1.5a1 1 0 0 0 0-5H18",
-												},
-												children: [],
-											},
-											{
-												tag: "path",
-												attrs: { d: "M4 22h16" },
-												children: [],
-											},
-											{
-												tag: "path",
-												attrs: {
-													d: "M6 9a6 6 0 0 0 12 0V3a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1z",
-												},
-												children: [],
-											},
-											{
-												tag: "path",
-												attrs: {
-													d: "M6 9H4.5a1 1 0 0 1 0-5H6",
-												},
-												children: [],
-											},
-										],
-									},
+									generateTrophySVG(
+										"w-5 h-5 text-yellow-500",
+									),
 									{
 										tag: "div",
 										class: "text-2xl",

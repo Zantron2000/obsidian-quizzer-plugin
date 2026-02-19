@@ -1,5 +1,7 @@
 import { HtmlRenderData, QuestionManager, TrueFalseData } from "types";
 import buildHTML from "view/buildHTML";
+import generateCheckSVG from "view/svgs/generateCheckSVG";
+import generateXSVG from "view/svgs/generateXSVG";
 
 export default class TFManager implements QuestionManager {
 	static TRUE_FALSE_TYPES = ["true-false", "tf"];
@@ -123,59 +125,8 @@ export default class TFManager implements QuestionManager {
 			? this.data.answer.explanation
 			: this.data.incorrectExplanation;
 		const svg: HtmlRenderData = !isCorrect
-			? {
-					tag: "svg",
-					class: "w-4 h-4 text-red-600",
-					attrs: {
-						xmlns: "http://www.w3.org/2000/svg",
-						viewBox: "0 0 24 24",
-						fill: "none",
-						stroke: "currentColor",
-						"stroke-width": 2,
-						"stroke-linecap": "round",
-						"stroke-linejoin": "round",
-					},
-					children: [
-						{
-							tag: "path",
-							attrs: {
-								d: "M18 6 6 18",
-							},
-							children: [],
-						},
-						{
-							tag: "path",
-							attrs: {
-								d: "m6 6 12 12",
-							},
-							children: [],
-						},
-					],
-				}
-			: {
-					tag: "svg",
-					class: "w-4 h-4 text-green-600",
-					attrs: {
-						xmlns: "http://www.w3.org/2000/svg",
-						width: 24,
-						height: 24,
-						viewBox: "0 0 24 24",
-						fill: "none",
-						stroke: "currentColor",
-						"stroke-width": 2,
-						"stroke-linecap": "round",
-						"stroke-linejoin": "round",
-					},
-					children: [
-						{
-							tag: "path",
-							attrs: {
-								d: "M20 6 9 17l-5-5",
-							},
-							children: [],
-						},
-					],
-				};
+			? generateXSVG("w-4 h-4 text-red-600")
+			: generateCheckSVG("w-4 h-4 text-green-600");
 
 		return {
 			tag: "div",
@@ -291,11 +242,6 @@ export default class TFManager implements QuestionManager {
 							}
 						},
 						children: [
-							{
-								tag: "svg",
-								class: "w-4 h-4",
-								children: [],
-							},
 							{
 								tag: "span",
 								text: this.submitted

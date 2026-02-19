@@ -1,5 +1,7 @@
 import { HtmlRenderData } from "types";
 import buildHTML from "view/buildHTML";
+import generateCheckSVG from "view/svgs/generateCheckSVG";
+import generateXSVG from "view/svgs/generateXSVG";
 
 export default class ResultsManager {
 	constructor() {}
@@ -9,59 +11,8 @@ export default class ResultsManager {
 		questionIdx: number,
 	): HtmlRenderData {
 		const svg: HtmlRenderData = !isCorrect
-			? {
-					tag: "svg",
-					class: "w-4 h-4 text-red-600",
-					attrs: {
-						xmlns: "http://www.w3.org/2000/svg",
-						viewBox: "0 0 24 24",
-						fill: "none",
-						stroke: "currentColor",
-						"stroke-width": 2,
-						"stroke-linecap": "round",
-						"stroke-linejoin": "round",
-					},
-					children: [
-						{
-							tag: "path",
-							attrs: {
-								d: "M18 6 6 18",
-							},
-							children: [],
-						},
-						{
-							tag: "path",
-							attrs: {
-								d: "m6 6 12 12",
-							},
-							children: [],
-						},
-					],
-				}
-			: {
-					tag: "svg",
-					class: "w-4 h-4 text-green-600",
-					attrs: {
-						xmlns: "http://www.w3.org/2000/svg",
-						width: 24,
-						height: 24,
-						viewBox: "0 0 24 24",
-						fill: "none",
-						stroke: "currentColor",
-						"stroke-width": 2,
-						"stroke-linecap": "round",
-						"stroke-linejoin": "round",
-					},
-					children: [
-						{
-							tag: "path",
-							attrs: {
-								d: "M20 6 9 17l-5-5",
-							},
-							children: [],
-						},
-					],
-				};
+			? generateXSVG("w-4 h-4 text-red-600")
+			: generateCheckSVG("w-4 h-4 text-green-600");
 
 		return {
 			tag: "div",
@@ -101,30 +52,7 @@ export default class ResultsManager {
 					{
 						tag: "div",
 						class: "w-24 h-24 mx-auto mb-4 text-accent-light rounded-full flex items-center justify-center",
-						children: [
-							{
-								tag: "svg",
-								class: "w-12 h-12 text-accent-dark",
-								attrs: {
-									xmlns: "http://www.w3.org/2000/svg",
-									width: 24,
-									height: 24,
-									viewBox: "0 0 24 24",
-									fill: "none",
-									stroke: "currentColor",
-									"stroke-width": 2,
-									"stroke-linecap": "round",
-									"stroke-linejoin": "round",
-								},
-								children: [
-									{
-										tag: "path",
-										attrs: { d: "M20 6 9 17l-5-5" },
-										children: [],
-									},
-								],
-							},
-						],
+						children: [generateCheckSVG("w-12 h-12 text-accent")],
 					},
 					{
 						tag: "p",
@@ -199,11 +127,6 @@ export default class ResultsManager {
 				class: "clickable-icon w-full flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-accent hover:bg-accent-dark text-on-accent disabled:opacity-50 disabled:cursor-not-allowed transition-colors",
 				clickHandler: () => resetCallback(),
 				children: [
-					{
-						tag: "svg",
-						class: "w-5 h-5",
-						children: [],
-					},
 					{
 						tag: "span",
 						text: "Back to Start",
