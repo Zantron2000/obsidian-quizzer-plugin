@@ -233,7 +233,7 @@ export default class ErrorManager {
 
 		return {
 			tag: "div",
-			class: "bg-red-50 border border-red-200 rounded-lg p-4",
+			class: "border bg-secondary-alt border-red-600 rounded-lg p-4",
 			children: [
 				{
 					tag: "div",
@@ -297,7 +297,7 @@ export default class ErrorManager {
 							children: [
 								{
 									tag: "div",
-									class: "text-sm text-red-800 mb-1",
+									class: "text-sm text-red-600 mb-1",
 									text:
 										error!.questionIndex == null
 											? "General Error"
@@ -306,17 +306,17 @@ export default class ErrorManager {
 								},
 								{
 									tag: "div",
-									class: "text-xs font-mono text-gray-600 mb-2 bg-gray-100 px-2 py-1 rounded inline-block",
+									class: "text-xs font-mono text-muted mb-2 bg-secondary px-2 py-1 rounded inline-block",
 									text: error!.path,
 									children: [],
 								},
 								{
 									tag: "div",
-									class: "text-sm text-gray-900",
+									class: "text-sm",
 									children: [
 										{
 											tag: "span",
-											class: "font-medium text-red-900",
+											class: "font-medium text-red-600",
 											text: "property: ",
 											children: [],
 										},
@@ -340,7 +340,7 @@ export default class ErrorManager {
 			// Header
 			{
 				tag: "div",
-				class: "bg-red-50 border-b border-red-200 p-6",
+				class: "border-b p-6",
 				children: [
 					{
 						tag: "div",
@@ -400,13 +400,13 @@ export default class ErrorManager {
 								children: [
 									{
 										tag: "p",
-										class: "text-2xl mb-1 text-gray-900",
+										class: "text-2xl mb-1",
 										text: "Invalid Quiz Data",
 										children: [],
 									},
 									{
 										tag: "p",
-										class: "text-gray-700",
+										class: "text-muted",
 										text: `Your quiz configuration contains ${this.errors.length} validation error(s) that must be fixed before proceeding.`,
 										children: [],
 									},
@@ -431,17 +431,17 @@ export default class ErrorManager {
 					// Instructions
 					{
 						tag: "div",
-						class: "mt-6 bg-blue-50 border border-blue-200 rounded-lg p-4",
+						class: "mt-6 bg-secondary-alt border border-blue-200 rounded-lg p-4",
 						children: [
 							{
 								tag: "p",
-								class: "text-sm mb-2 text-gray-900",
+								class: "text-sm mb-2",
 								text: "How to fix:",
 								children: [],
 							},
 							{
 								tag: "ul",
-								class: "text-sm text-gray-700 space-y-1",
+								class: "text-sm text-muted space-y-1",
 								children: [
 									{
 										tag: "li",
