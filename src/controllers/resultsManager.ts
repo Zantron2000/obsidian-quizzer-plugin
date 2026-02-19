@@ -65,7 +65,7 @@ export default class ResultsManager {
 
 		return {
 			tag: "div",
-			class: "flex items-center gap-3 p-3 bg-gray-50 rounded-lg",
+			class: "flex items-center gap-3 p-3 bg-secondary-alt rounded-lg",
 			children: [
 				{
 					tag: "div",
@@ -77,7 +77,7 @@ export default class ResultsManager {
 				},
 				{
 					tag: "span",
-					class: "text-sm text-gray-700",
+					class: "text-sm",
 					text: `Question ${questionIdx + 1}`,
 					children: [],
 				},
@@ -100,11 +100,11 @@ export default class ResultsManager {
 				children: [
 					{
 						tag: "div",
-						class: "w-24 h-24 mx-auto mb-4 bg-purple-100 rounded-full flex items-center justify-center",
+						class: "w-24 h-24 mx-auto mb-4 text-accent-light rounded-full flex items-center justify-center",
 						children: [
 							{
 								tag: "svg",
-								class: "w-12 h-12 text-purple-600",
+								class: "w-12 h-12 text-accent-dark",
 								attrs: {
 									xmlns: "http://www.w3.org/2000/svg",
 									width: 24,
@@ -128,13 +128,13 @@ export default class ResultsManager {
 					},
 					{
 						tag: "p",
-						class: "text-3xl mb-2 text-gray-900",
+						class: "text-3xl mb-2",
 						text: "Quiz Complete!",
 						children: [],
 					},
 					{
 						tag: "p",
-						class: "text-gray-600",
+						class: "text-muted",
 						text: "Here are your results",
 						children: [],
 					},
@@ -143,17 +143,17 @@ export default class ResultsManager {
 			// Score Box
 			{
 				tag: "div",
-				class: "bg-gray-50 rounded-lg p-6 mb-8 text-center",
+				class: "bg-secondary-alt rounded-lg p-6 mb-8 text-center",
 				children: [
 					{
 						tag: "div",
-						class: "text-5xl mb-2 text-purple-600",
+						class: "text-5xl mb-2 text-accent",
 						text: `${Math.round((correctQuestions.filter(Boolean).length / correctQuestions.length) * 100)}%`, // calculated percentage
 						children: [],
 					},
 					{
 						tag: "div",
-						class: "text-gray-700",
+						class: "text-muted",
 						children: [
 							{
 								tag: "span",
@@ -162,7 +162,7 @@ export default class ResultsManager {
 							},
 							{
 								tag: "span",
-								class: "text-purple-600",
+								class: "text-accent",
 								text: `${correctQuestions.filter(Boolean).length}`,
 								children: [],
 							},
@@ -173,7 +173,7 @@ export default class ResultsManager {
 							},
 							{
 								tag: "span",
-								class: "text-purple-600",
+								class: "text-accent",
 								text: `${correctQuestions.length}`,
 								children: [],
 							},
@@ -196,7 +196,7 @@ export default class ResultsManager {
 			// Back to Start Button
 			{
 				tag: "button",
-				class: "cursor-pointer w-full bg-accent hover:bg-accent-dark text-white hover:text-white py-4 rounded-lg flex items-center justify-center gap-2 clickable-icon transition-colors",
+				class: "clickable-icon w-full flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-accent hover:bg-accent-dark text-on-accent disabled:opacity-50 disabled:cursor-not-allowed transition-colors",
 				clickHandler: () => resetCallback(),
 				children: [
 					{
