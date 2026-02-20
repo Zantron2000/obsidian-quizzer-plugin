@@ -9,17 +9,17 @@ import generateBookSVG from "view/svgs/generateBookSVG";
 import generateTrophySVG from "view/svgs/generateTrophySVG";
 import generateParagraph from "view/html/generateParagraph";
 import generateListItem from "view/html/generateListItem";
+import generateDiv from "view/html/generateDiv";
 
 export class QuizManager {
 	questionManagers: QuestionManager[] = [];
 	questionIndex: number = 0;
 	showStartMenu: boolean = true;
 	container: HTMLElement;
-	htmlContainer: HtmlRenderData = {
-		tag: "div",
-		class: "bg-secondary rounded-lg shadow-lg p-8",
-		children: [],
-	};
+	htmlContainer: HtmlRenderData = generateDiv(
+		"bg-secondary rounded-lg shadow-lg p-8",
+		[],
+	);
 	errorManager: ErrorManager;
 	resultsManager: ResultsManager;
 	correctQuestions: boolean[] = [];
@@ -70,89 +70,47 @@ export class QuizManager {
 	#buildStartMenu(): HtmlRenderData[] {
 		return [
 			// Header
-			{
-				tag: "div",
-				class: "text-center mb-8",
-				children: [
-					{
-						tag: "div",
-						class: "flex justify-center mb-4",
-						children: [
-							{
-								tag: "div",
-								class: "w-16 h-16 bg-accent-light rounded-full flex items-center justify-center",
-								children: [
-									generateBookSVG("w-8 h-8 text-accent-dark"),
-								],
-							},
-						],
-					},
-					generateParagraph("Multiple Choice Quiz", "text-3xl mb-2"),
-					generateParagraph(
-						"Test your knowledge with interactive questions",
-						"",
+			generateDiv("text-center mb-8", [
+				generateDiv("flex justify-center mb-4", [
+					generateDiv(
+						"w-16 h-16 bg-accent-light rounded-full flex items-center justify-center",
+						[generateBookSVG("w-8 h-8 text-accent-dark")],
 					),
-				],
-			},
+				]),
+				generateParagraph("Multiple Choice Quiz", "text-3xl mb-2"),
+				generateParagraph(
+					"Test your knowledge with interactive questions",
+					"",
+				),
+			]),
 			// Stats
-			{
-				tag: "div",
-				class: "grid grid-cols-3 gap-4 mb-8",
-				children: [
-					{
-						tag: "div",
-						class: "bg-secondary-alt rounded-lg p-4 text-center",
-						children: [
-							generateParagraph(
-								this.questionManagers.length.toString(),
-								"text-2xl mb-1",
-							),
-							generateParagraph(
-								"Questions",
-								"text-sm text-muted",
-							),
-						],
-					},
-					{
-						tag: "div",
-						class: "bg-secondary-alt rounded-lg p-4 text-center",
-						children: [
-							generateParagraph(
-								Math.ceil(
-									this.questionManagers.length / 2,
-								).toString(),
-								"text-2xl mb-1",
-							),
-							generateParagraph("Minutes", "text-sm text-muted"),
-						],
-					},
-					{
-						tag: "div",
-						class: "bg-secondary-alt rounded-lg p-4 text-center",
-						children: [
-							{
-								tag: "div",
-								class: "flex items-center justify-center gap-1 mb-1",
-								children: [
-									generateTrophySVG(
-										"w-5 h-5 text-yellow-500",
-									),
-									generateParagraph("N/A", "text-2xl"),
-								],
-							},
-							generateParagraph(
-								"Best Score",
-								"text-sm text-muted",
-							),
-						],
-					},
-				],
-			},
+			generateDiv("grid grid-cols-3 gap-4 mb-8", [
+				generateDiv("bg-secondary-alt rounded-lg p-4 text-center", [
+					generateParagraph(
+						this.questionManagers.length.toString(),
+						"text-2xl mb-1",
+					),
+					generateParagraph("Questions", "text-sm text-muted"),
+				]),
+				generateDiv("bg-secondary-alt rounded-lg p-4 text-center", [
+					generateParagraph(
+						Math.ceil(this.questionManagers.length / 2).toString(),
+						"text-2xl mb-1",
+					),
+					generateParagraph("Minutes", "text-sm text-muted"),
+				]),
+				generateDiv("bg-secondary-alt rounded-lg p-4 text-center", [
+					generateDiv("flex items-center justify-center gap-1 mb-1", [
+						generateTrophySVG("w-5 h-5 text-yellow-500"),
+						generateParagraph("N/A", "text-2xl"),
+					]),
+					generateParagraph("Best Score", "text-sm text-muted"),
+				]),
+			]),
 			// Instructions
-			{
-				tag: "div",
-				class: "bg-secondary-alt border border-blue-200 rounded-lg p-4 mb-8",
-				children: [
+			generateDiv(
+				"bg-secondary-alt border border-blue-200 rounded-lg p-4 mb-8",
+				[
 					generateParagraph("Instructions:", "text-sm mb-2"),
 					{
 						tag: "ul",
@@ -170,7 +128,7 @@ export class QuizManager {
 						],
 					},
 				],
-			},
+			),
 			// Start Button
 			{
 				tag: "button",
@@ -240,44 +198,32 @@ export class QuizManager {
 			const currentQM = this.questionManagers[this.questionIndex]!;
 			buildHTML(this.container, [
 				// Progress Bar
-				{
-					tag: "div",
-					class: "p-4 border-b border-modifier",
-					children: [
+				generateDiv("p-4 border-b border-modifier", [
+					generateDiv("flex items-center justify-between mb-2", [
 						{
-							tag: "div",
-							class: "flex items-center justify-between mb-2",
-							children: [
-								{
-									tag: "span",
-									class: "text-sm text-muted",
-									text: `Question ${this.questionIndex + 1} of ${this.questionManagers.length}`,
-									children: [],
-								},
-								{
-									tag: "span",
-									class: "text-sm text-muted",
-									text: `${this.questionIndex} answered`,
-									children: [],
-								},
-							],
+							tag: "span",
+							class: "text-sm text-muted",
+							text: `Question ${this.questionIndex + 1} of ${this.questionManagers.length}`,
+							children: [],
 						},
 						{
-							tag: "div",
-							class: "w-full bg-secondary-alt rounded-full h-2",
-							children: [
-								{
-									tag: "div",
-									class: "bg-accent h-2 rounded-full transition-all",
-									attrs: {
-										style: `width: ${((this.questionIndex + 1) / this.questionManagers.length) * 100}%`,
-									},
-									children: [],
-								},
-							],
+							tag: "span",
+							class: "text-sm text-muted",
+							text: `${this.questionIndex} answered`,
+							children: [],
 						},
-					],
-				},
+					]),
+					generateDiv("w-full bg-secondary-alt rounded-full h-2", [
+						{
+							tag: "div",
+							class: "bg-accent h-2 rounded-full transition-all",
+							attrs: {
+								style: `width: ${((this.questionIndex + 1) / this.questionManagers.length) * 100}%`,
+							},
+							children: [],
+						},
+					]),
+				]),
 			]);
 
 			const questionContainer = this.container.createEl("div", {});
