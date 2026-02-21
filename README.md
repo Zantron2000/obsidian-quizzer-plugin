@@ -23,11 +23,7 @@
 
 ### Generating a Quiz
 
-To generate a quiz, create a new note and create the following markdown code block:
-
-```quizz
-
-```
+To generate a quiz, create a markdown block using the `quizz` identifier.
 
 and enter in the following JSON format:
 
@@ -88,11 +84,7 @@ The data array should be populated with different types of questions. Quizzer cu
 
 ### Generating a Daily Quiz
 
-The daily quiz combines all the questions from your vault and generates a quiz for you to take each day. To generate a daily quiz, create a new note and create the following markdown code block:
-
-```dailyquiz
-
-```
+The daily quiz combines all the questions from your vault and generates a quiz for you to take each day. To generate a daily quiz, create a markdown block with the `dailyquiz` identifier.
 
 Or click the "Generate Daily Quiz" button in the right sidebar. This will create a daily quiz in the root of your vault.
 
