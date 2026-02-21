@@ -497,6 +497,10 @@
   border-color: var(--background-modifier-border);
   opacity: 0.5;
 }
+.ignored-option:hover {
+  border-color: var(--background-modifier-border);
+  opacity: 0.5;
+}
 .ignored-option-bubble {
   border-color: var(--background-modifier-border);
 }
