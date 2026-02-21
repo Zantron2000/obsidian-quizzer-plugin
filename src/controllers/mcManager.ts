@@ -87,19 +87,19 @@ export default class MCManager implements QuestionManager {
 	private getOptionClasses(optionIdx: number): string {
 		if (this.submitted === false) {
 			if (this.selectedIdx === optionIdx) {
-				return "border-accent";
+				return "selected-option";
 			} else {
-				return "border-modifier hover:border-modifier-hover bg-secondary-alt";
+				return "option";
 			}
 		} else {
 			const isAnswer = this.isRightAnswer(optionIdx);
 
 			if (isAnswer) {
-				return "border-green-600";
+				return "correct-option";
 			} else if (optionIdx === this.selectedIdx) {
-				return "border-red-600";
+				return "incorrect-option";
 			} else {
-				return "border-modifier opacity-50";
+				return "ignored-option";
 			}
 		}
 	}
@@ -115,11 +115,11 @@ export default class MCManager implements QuestionManager {
 			const isAnswer = this.isRightAnswer(optionIdx);
 
 			if (isAnswer) {
-				return "border-green-600 bg-green-600";
+				return "correct-option-bubble";
 			} else if (optionIdx === this.selectedIdx) {
-				return "border-red-600 bg-red-600";
+				return "incorrect-option-bubble";
 			} else {
-				return "border-modifier";
+				return "ignored-option-bubble";
 			}
 		}
 	}

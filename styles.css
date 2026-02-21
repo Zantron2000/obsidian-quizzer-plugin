@@ -17,7 +17,6 @@
   --color-green-600: oklch(62.7% 0.194 149.214);
   --color-blue-200: oklch(88.2% 0.059 254.128);
   --color-purple-600: oklch(55.8% 0.288 302.321);
-  --color-purple-700: oklch(49.6% 0.265 301.924);
   --color-gray-50: oklch(98.5% 0.002 247.839);
   --color-gray-200: oklch(92.8% 0.006 264.531);
   --color-gray-900: oklch(21% 0.034 264.665);
@@ -274,9 +273,6 @@
 .border-green-200 {
   border-color: var(--color-green-200);
 }
-.border-green-600 {
-  border-color: var(--color-green-600);
-}
 .border-red-200 {
   border-color: var(--color-red-200);
 }
@@ -292,17 +288,8 @@
 .bg-green-100 {
   background-color: var(--color-green-100);
 }
-.bg-green-600 {
-  background-color: var(--color-green-600);
-}
-.bg-purple-600 {
-  background-color: var(--color-purple-600);
-}
 .bg-red-100 {
   background-color: var(--color-red-100);
-}
-.bg-red-600 {
-  background-color: var(--color-red-600);
 }
 .p-3 {
   padding: calc(var(--spacing) * 3);
@@ -325,17 +312,11 @@
 .px-4\! {
   padding-inline: calc(var(--spacing) * 4) !important;
 }
-.px-6 {
-  padding-inline: calc(var(--spacing) * 6);
-}
 .py-1 {
   padding-block: calc(var(--spacing) * 1);
 }
 .py-2 {
   padding-block: calc(var(--spacing) * 2);
-}
-.py-3 {
-  padding-block: calc(var(--spacing) * 3);
 }
 .py-6\! {
   padding-block: calc(var(--spacing) * 6) !important;
@@ -400,9 +381,6 @@
 .text-yellow-500 {
   color: var(--color-yellow-500);
 }
-.opacity-50 {
-  opacity: 50%;
-}
 .shadow-lg {
   --tw-shadow: 0 10px 15px -3px var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 4px 6px -4px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
   box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
@@ -421,13 +399,6 @@
   &:hover {
     @media (hover: hover) {
       background-color: var(--color-amber-700);
-    }
-  }
-}
-.hover\:bg-purple-700 {
-  &:hover {
-    @media (hover: hover) {
-      background-color: var(--color-purple-700);
     }
   }
 }
@@ -450,11 +421,6 @@
 .disabled\:bg-gray-50 {
   &:disabled {
     background-color: var(--color-gray-50);
-  }
-}
-.disabled\:opacity-50 {
-  &:disabled {
-    opacity: 50%;
   }
 }
 .bg-accent {
@@ -526,6 +492,41 @@
 .progress-button:hover {
   background-color: hsl(	var(--accent-h),	var(--accent-s),	calc(var(--accent-l) - 5%)	);
   color: var(--text-on-accent);
+}
+.ignored-option {
+  border-color: var(--background-modifier-border);
+  opacity: 0.5;
+}
+.ignored-option-bubble {
+  border-color: var(--background-modifier-border);
+}
+.correct-option {
+  border-color: #16a34a;
+}
+.correct-option-bubble {
+  border-color: #16a34a;
+  background-color: #16a34a;
+}
+.incorrect-option {
+  border-color: #dc2626;
+}
+.incorrect-option-bubble {
+  border-color: #dc2626;
+  background-color: #dc2626;
+}
+.selected-option {
+  border-color: hsl(var(--accent-h), var(--accent-s), var(--accent-l));
+}
+.selected-option-bubble {
+  border-color: hsl(var(--accent-h), var(--accent-s), var(--accent-l));
+  background-color: hsl(var(--accent-h), var(--accent-s), var(--accent-l));
+}
+.option {
+  border-color: var(--background-modifier-border);
+  background-color: var(--background-secondary-alt);
+}
+.option:hover {
+  border-color: var(--background-modifier-border-hover);
 }
 @property --tw-rotate-x {
   syntax: "*";

@@ -118,7 +118,7 @@ export default class SAManager implements QuestionManager {
 			feedback.push({
 				tag: "button",
 				text: "Actually I was Correct",
-				class: "clickable-icon flex items-center gap-2 px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white text-sm rounded-lg transition-colors",
+				class: "clickable-icon cursor-pointer flex items-center gap-2 px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white text-sm rounded-lg transition-colors",
 				clickHandler: () => {
 					progressCallback(true);
 				},

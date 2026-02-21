@@ -71,19 +71,19 @@ export default class TFManager implements QuestionManager {
 	private getOptionClasses(label: boolean): string {
 		if (this.submitted === false) {
 			if (this.selected === label) {
-				return "border-accent";
+				return "selected-option";
 			} else {
-				return "border-modifier hover:border-modifier-hover bg-secondary-alt";
+				return "option";
 			}
 		} else {
 			const isAnswer = this.isRightAnswer(label);
 
 			if (isAnswer) {
-				return "border-green-600";
+				return "correct-option";
 			} else if (label === this.selected) {
-				return "border-red-600";
+				return "incorrect-option";
 			} else {
-				return "border-modifier opacity-50";
+				return "ignored-option";
 			}
 		}
 	}
@@ -91,7 +91,7 @@ export default class TFManager implements QuestionManager {
 	private getOptionBubbleClasses(label: boolean): string {
 		if (this.submitted === false) {
 			if (this.selected === label) {
-				return "border-accent bg-accent";
+				return "selected-option-bubble";
 			} else {
 				return "border-modifier bg-secondary";
 			}
@@ -99,11 +99,11 @@ export default class TFManager implements QuestionManager {
 			const isAnswer = this.isRightAnswer(label);
 
 			if (isAnswer) {
-				return "border-green-600 bg-green-600";
+				return "correct-option-bubble";
 			} else if (label === this.selected) {
-				return "border-red-600 bg-red-600";
+				return "incorrect-option-bubble";
 			} else {
-				return "border-modifier";
+				return "ignored-option-bubble";
 			}
 		}
 	}
