@@ -19,7 +19,7 @@
 	background-color: hsl(
 		var(--accent-h),
 		var(--accent-s),
-		calc(var(--accent-l))
+		calc(var(--accent-l) - 5%)
 	);
 }
 
@@ -49,6 +49,10 @@
 
 .text-on-accent {
 	color: var(--text-on-accent);
+}
+
+.hover\:text-on-accent-hover:hover {
+	color: var(--text-on-accent-hover);
 }
 
 .border-modifier {
@@ -81,4 +85,29 @@
 		var(--accent-s),
 		calc(var(--accent-l) - 5%)
 	);
+}
+
+.progress-button {
+	cursor: pointer;
+	width: 100%;
+	background-color: hsl(var(--accent-h), var(--accent-s), var(--accent-l));
+	color: var(--text-on-accent);
+	padding: 1rem; /* py-4 */
+	border-radius: 0.5rem; /* rounded-lg */
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem; /* gap-2 */
+	transition-property: color, background-color;
+	transition-duration: 150ms;
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.progress-button:hover {
+	background-color: hsl(
+		var(--accent-h),
+		var(--accent-s),
+		calc(var(--accent-l) - 5%)
+	);
+	color: var(--text-on-accent);
 }

@@ -209,9 +209,8 @@ export default class SAManager implements QuestionManager {
 				children: [
 					{
 						tag: "button",
-						class: `
-							clickable-icon w-full flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-purple-600 hover:bg-purple-700 text-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors
-						`,
+						text: this.submitted ? "Move On" : "Submit Answer",
+						class: "clickable-icon progress-button",
 						clickHandler: () => {
 							if (!this.submitted) {
 								this.submitted = true;
@@ -224,15 +223,7 @@ export default class SAManager implements QuestionManager {
 								progressCallback(isCorrect);
 							}
 						},
-						children: [
-							{
-								tag: "span",
-								text: this.submitted
-									? "Move On"
-									: "Submit Answer",
-								children: [],
-							},
-						],
+						children: [],
 					},
 				],
 			},

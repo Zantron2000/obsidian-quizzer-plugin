@@ -224,9 +224,7 @@ export default class MCManager implements QuestionManager {
 							this.selectedIdx === null
 								? { disabled: "true" }
 								: {},
-						class: `
-							clickable-icon w-full flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-accent hover:bg-accent-dark text-on-accent disabled:opacity-50 disabled:cursor-not-allowed transition-colors
-						`,
+						class: "clickable-icon progress-button",
 						clickHandler: () => {
 							if (this.selectedIdx !== null) {
 								if (!this.submitted) {
@@ -241,15 +239,8 @@ export default class MCManager implements QuestionManager {
 								}
 							}
 						},
-						children: [
-							{
-								tag: "span",
-								text: this.submitted
-									? "Move On"
-									: "Submit Answer",
-								children: [],
-							},
-						],
+						text: this.submitted ? "Move On" : "Submit Answer",
+						children: [],
 					},
 				],
 			},

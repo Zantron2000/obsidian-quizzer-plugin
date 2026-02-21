@@ -113,15 +113,10 @@ export default class ResultsManager {
 			// Back to Start Button
 			{
 				tag: "button",
-				class: "clickable-icon w-full flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-accent hover:bg-accent-dark text-on-accent disabled:opacity-50 disabled:cursor-not-allowed transition-colors",
+				text: "Back to Start",
+				class: "clickable-icon progress-button",
 				clickHandler: () => resetCallback(),
-				children: [
-					{
-						tag: "span",
-						text: "Back to Start",
-						children: [],
-					},
-				],
+				children: [],
 			},
 		]);
 	}

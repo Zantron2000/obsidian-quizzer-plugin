@@ -132,40 +132,13 @@ export class QuizManager {
 			// Start Button
 			{
 				tag: "button",
-				class: "cursor-pointer w-full bg-accent hover:bg-accent-dark text-on-accent py-4 rounded-lg flex items-center justify-center gap-2 clickable-icon transition-colors",
+				class: "clickable-icon progress-button",
 				clickHandler: () => {
 					this.showStartMenu = false;
 					this.render();
 				},
-				children: [
-					{
-						tag: "svg",
-						class: "w-4 h-4",
-						attrs: {
-							xmlns: "http://www.w3.org/2000/svg",
-							viewBox: "0 0 24 24",
-							fill: "none",
-							stroke: "currentColor",
-							"stroke-width": "2",
-							"stroke-linecap": "round",
-							"stroke-linejoin": "round",
-						},
-						children: [
-							{
-								tag: "path",
-								attrs: {
-									d: "M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z",
-								},
-								children: [],
-							},
-						],
-					},
-					{
-						tag: "span",
-						text: "Start Quiz",
-						children: [],
-					},
-				],
+				text: "Start Quiz",
+				children: [],
 			},
 		];
 	}
