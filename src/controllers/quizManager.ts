@@ -23,6 +23,7 @@ export class QuizManager {
 	errorManager: ErrorManager;
 	resultsManager: ResultsManager;
 	correctQuestions: boolean[] = [];
+	quizData?: Quiz;
 
 	private static shuffle<T>(array: T[]): T[] {
 		const shuffled = [...array];
@@ -49,6 +50,7 @@ export class QuizManager {
 
 		if (this.errorManager.isValid) {
 			const typedQuizData = quizData as Quiz;
+			this.quizData = typedQuizData;
 
 			typedQuizData.data.forEach((questionData) => {
 				if (MCManager.isMultipleChoiceQuestion(questionData)) {
@@ -77,11 +79,8 @@ export class QuizManager {
 						[generateBookSVG("w-8 h-8 text-accent-dark")],
 					),
 				]),
-				generateParagraph("Multiple Choice Quiz", "text-3xl mb-2"),
-				generateParagraph(
-					"Test your knowledge with interactive questions",
-					"",
-				),
+				generateParagraph(this.quizData!.title, "text-3xl mb-2"),
+				generateParagraph(this.quizData!.description, ""),
 			]),
 			// Stats
 			generateDiv("grid grid-cols-3 gap-4 mb-8", [

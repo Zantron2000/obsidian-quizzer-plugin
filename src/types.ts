@@ -44,7 +44,7 @@ export interface HtmlRenderData {
 
 export interface Quiz {
 	title: string;
-	description?: string;
+	description: string;
 	data: (MultipleChoiceData | ShortAnswerData | TrueFalseData)[];
 }
 
