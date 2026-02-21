@@ -186,11 +186,14 @@ export default class SAManager implements QuestionManager {
 						children: [
 							{
 								tag: "input",
-								class: "clickable-icon cursor-pointer w-full text-base! py-6! px-4! border-2 border-gray-200 rounded-lg focus:border-purple-600 focus:outline-none disabled:bg-gray-50 disabled:cursor-not-allowed text-gray-900",
+								class: "clickable-icon cursor-pointer w-full text-base! py-6! px-4! border-2 border-gray-200 rounded-lg focus:border-purple-600 focus:outline-none disabled:cursor-not-allowed text-gray-900",
 								attrs: {
 									type: "text",
 									value: this.input,
 									placeholder: "Type your answer here...",
+									...(this.submitted
+										? { disabled: true }
+										: {}),
 								},
 								inputHandler: (value: string) => {
 									this.handleInputChange(value);
