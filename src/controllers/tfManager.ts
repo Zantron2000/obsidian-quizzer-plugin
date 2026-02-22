@@ -132,14 +132,14 @@ export default class TFManager implements QuestionManager {
 		return {
 			tag: "div",
 			class: `
-			  rounded-lg px-4 py-2 mb-2
-				${isCorrect ? "border-2 border-green-200" : "border-2 border-red-200"}
+			  rounded-lg px-4 py-2 border-2
+				${isCorrect ? "border-green-200" : "border-red-200"}
 				${explanation ? "block" : "hidden"}
 			`,
 			children: [
 				{
 					tag: "div",
-					class: "flex items-start gap-3",
+					class: "flex items-start gap-3 py-2",
 					children: [
 						{
 							tag: "div",
@@ -154,11 +154,11 @@ export default class TFManager implements QuestionManager {
 							children: [
 								generateParagraph(
 									isCorrect ? "Correct!" : "Incorrect",
-									`mb-2 ${isCorrect ? "text-green-600" : "text-red-600"}`,
+									`mb-2 ${isCorrect ? "text-green-600" : "text-red-600"} m-0 my-0`,
 								),
 								generateParagraph(
 									explanation ?? "",
-									"text-sm text-muted",
+									"text-sm text-muted m-0 my-0",
 								),
 							],
 						},

@@ -146,7 +146,7 @@ export default class MCManager implements QuestionManager {
 		return {
 			tag: "div",
 			class: `
-			  rounded-lg px-4 py-2 mb-2 border-2
+			  rounded-lg px-4 py-2 border-2
 				${isCorrect ? "border-green-200" : "border-red-200"}
 				${explanation ? "block" : "hidden"}
 			`,
