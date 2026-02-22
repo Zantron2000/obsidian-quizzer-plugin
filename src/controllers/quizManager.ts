@@ -84,27 +84,47 @@ export class QuizManager {
 			]),
 			// Stats
 			generateDiv("grid grid-cols-3 gap-4 mb-8", [
-				generateDiv("bg-secondary-alt rounded-lg p-4 text-center", [
-					generateParagraph(
-						this.questionManagers.length.toString(),
-						"text-2xl mb-1",
-					),
-					generateParagraph("Questions", "text-sm text-muted"),
-				]),
-				generateDiv("bg-secondary-alt rounded-lg p-4 text-center", [
-					generateParagraph(
-						Math.ceil(this.questionManagers.length / 2).toString(),
-						"text-2xl mb-1",
-					),
-					generateParagraph("Minutes", "text-sm text-muted"),
-				]),
-				generateDiv("bg-secondary-alt rounded-lg p-4 text-center", [
-					generateDiv("flex items-center justify-center gap-1 mb-1", [
-						generateTrophySVG("w-5 h-5 text-yellow-500"),
-						generateParagraph("N/A", "text-2xl"),
-					]),
-					generateParagraph("Best Score", "text-sm text-muted"),
-				]),
+				generateDiv(
+					"bg-secondary-alt rounded-lg py-4 px-4 text-center flex flex-col items-center justify-center",
+					[
+						generateParagraph(
+							this.questionManagers.length.toString(),
+							"text-2xl w-full m-0 my-0",
+						),
+						generateParagraph(
+							"Questions",
+							"text-sm text-muted w-full m-0 my-0",
+						),
+					],
+				),
+				generateDiv(
+					"bg-secondary-alt rounded-lg py-4 px-4 text-center flex flex-col items-center justify-center",
+					[
+						generateParagraph(
+							Math.ceil(
+								this.questionManagers.length / 2,
+							).toString(),
+							"text-2xl w-full m-0 my-0",
+						),
+						generateParagraph(
+							"Minutes",
+							"text-sm text-muted w-full m-0 my-0",
+						),
+					],
+				),
+				generateDiv(
+					"bg-secondary-alt rounded-lg py-4 px-4 text-center flex flex-col items-center justify-center",
+					[
+						generateDiv("flex items-center justify-center gap-1", [
+							generateTrophySVG("w-5 h-5 text-yellow-500"),
+							generateParagraph("N/A", "text-2xl m-0 my-0"),
+						]),
+						generateParagraph(
+							"Best Score",
+							"text-sm text-muted w-full m-0 my-0",
+						),
+					],
+				),
 			]),
 			// Instructions
 			generateDiv(
