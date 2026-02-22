@@ -153,7 +153,7 @@ export default class MCManager implements QuestionManager {
 			children: [
 				{
 					tag: "div",
-					class: "flex items-start gap-3",
+					class: "flex items-start gap-3 py-2",
 					children: [
 						{
 							tag: "div",
@@ -168,11 +168,11 @@ export default class MCManager implements QuestionManager {
 							children: [
 								generateParagraph(
 									isCorrect ? "Correct!" : "Incorrect",
-									`mb-2 ${isCorrect ? "text-green-600" : "text-red-600"}`,
+									`mb-2 ${isCorrect ? "text-green-600" : "text-red-600"} m-0 my-0`,
 								),
 								generateParagraph(
 									explanation ?? "",
-									"text-sm text-muted",
+									"text-sm text-muted m-0 my-0",
 								),
 							],
 						},
