@@ -48,15 +48,18 @@ export default class ResultsManager {
 			// Header
 			{
 				tag: "div",
-				class: "text-center mb-8",
+				class: "text-center mb-4",
 				children: [
 					{
 						tag: "div",
-						class: "w-24 h-24 mx-auto mb-4 text-accent-light rounded-full flex items-center justify-center",
+						class: "w-12 h-12 mx-auto mb-4 text-accent-light rounded-full flex items-center justify-center",
 						children: [generateCheckSVG("w-12 h-12 text-accent")],
 					},
-					generateParagraph("Quiz Complete!", "text-3xl mb-2"),
-					generateParagraph("Here are your results", "text-muted"),
+					generateParagraph("Quiz Complete!", "text-3xl my-0 mb-2"),
+					generateParagraph(
+						"Here are your results",
+						"text-muted my-2",
+					),
 				],
 			},
 			// Score Box
