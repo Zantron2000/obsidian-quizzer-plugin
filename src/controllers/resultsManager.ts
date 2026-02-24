@@ -66,7 +66,7 @@ export default class ResultsManager {
 				children: [
 					generateParagraph(
 						`${Math.round((correctQuestions.filter(Boolean).length / correctQuestions.length) * 100)}%`,
-						"text-5xl mb-2 text-accent",
+						"text-5xl my-0 mb-2 text-accent",
 					),
 					{
 						tag: "div",
