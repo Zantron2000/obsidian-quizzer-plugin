@@ -128,7 +128,7 @@ export default class SAManager implements QuestionManager {
 
 		return {
 			tag: "div",
-			class: `rounded-lg p-4 mb-6 border-2 ${isCorrect ? "border-green-200" : "border-amber-200"}`,
+			class: `rounded-lg px-4 py-2 border-2 ${isCorrect ? "border-green-200" : "border-amber-200"}`,
 			children: [
 				{
 					tag: "div",
@@ -151,7 +151,7 @@ export default class SAManager implements QuestionManager {
 									isCorrect
 										? "Correct!"
 										: "Your answer was marked incorrect",
-									`mb-2 ${isCorrect ? "text-green-600" : "text-amber-600"}`,
+									`m-0 my-0 ${isCorrect ? "text-green-600" : "text-amber-600"}`,
 								),
 								...(isCorrect ? [] : feedback),
 							],
