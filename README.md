@@ -31,6 +31,7 @@ and enter in the following JSON format:
 {
 	"title": "A string representing the title of the quiz",
 	"description": "A string representing the description of the quiz",
+	"numberDisplayQuestions": 1, // An optional positive integer representing the max number of questions to display in a quiz. If not provided, all questions will be displayed.
 	"data": [] // An array of question objects
 }
 ```

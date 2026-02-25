@@ -52,19 +52,25 @@ export class QuizManager {
 			const typedQuizData = quizData as Quiz;
 			this.quizData = typedQuizData;
 
-			typedQuizData.data.forEach((questionData) => {
-				if (MCManager.isMultipleChoiceQuestion(questionData)) {
-					const mcManager = new MCManager(questionData);
-					this.questionManagers.push(mcManager);
-				} else if (TFManager.isTrueFalseQuestion(questionData)) {
-					const tfManager = new TFManager(questionData);
-					this.questionManagers.push(tfManager);
-				} else if (SAManager.isShortAnswerQuestion(questionData)) {
-					const saManager = new SAManager(questionData);
-					this.questionManagers.push(saManager);
-				}
-			});
+			this.determineQuestions();
 		}
+	}
+
+	private determineQuestions(): void {
+		this.questionManagers = [];
+
+		this.quizData!.data.forEach((questionData) => {
+			if (MCManager.isMultipleChoiceQuestion(questionData)) {
+				const mcManager = new MCManager(questionData);
+				this.questionManagers.push(mcManager);
+			} else if (TFManager.isTrueFalseQuestion(questionData)) {
+				const tfManager = new TFManager(questionData);
+				this.questionManagers.push(tfManager);
+			} else if (SAManager.isShortAnswerQuestion(questionData)) {
+				const saManager = new SAManager(questionData);
+				this.questionManagers.push(saManager);
+			}
+		});
 
 		this.questionManagers = QuizManager.shuffle(this.questionManagers);
 		if (this.quizData?.numberDisplayQuestions) {
@@ -179,8 +185,7 @@ export class QuizManager {
 		this.questionIndex = 0;
 		this.correctQuestions = [];
 		this.showStartMenu = true;
-		this.questionManagers = QuizManager.shuffle(this.questionManagers);
-		this.questionManagers.forEach((qm) => qm.reset());
+		this.determineQuestions();
 
 		this.render();
 	}
