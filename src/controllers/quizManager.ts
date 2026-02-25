@@ -67,6 +67,12 @@ export class QuizManager {
 		}
 
 		this.questionManagers = QuizManager.shuffle(this.questionManagers);
+		if (this.quizData?.numberDisplayQuestions) {
+			this.questionManagers = this.questionManagers.slice(
+				0,
+				this.quizData.numberDisplayQuestions,
+			);
+		}
 	}
 
 	#buildStartMenu(): HtmlRenderData[] {

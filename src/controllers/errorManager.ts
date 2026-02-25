@@ -14,6 +14,7 @@ export default class ErrorManager {
 		properties: {
 			title: { type: "string", format: "non-empty-string" },
 			description: { type: "string", format: "non-empty-string" },
+			numberDisplayQuestions: { type: "integer", minimum: 1 },
 			data: {
 				type: "array",
 				minItems: 1,
