@@ -154,11 +154,11 @@ export default class TFManager implements QuestionManager {
 							children: [
 								generateParagraph(
 									isCorrect ? "Correct!" : "Incorrect",
-									`mb-2 ${isCorrect ? "text-green-600" : "text-red-600"} m-0 my-0`,
+									`mb-2 ${isCorrect ? "text-green-600" : "text-red-600"} m-0 my-0!`,
 								),
 								generateParagraph(
 									explanation ?? "",
-									"text-sm text-muted m-0 my-0",
+									"text-sm text-muted m-0 my-0!",
 								),
 							],
 						},

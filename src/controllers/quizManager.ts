@@ -89,11 +89,11 @@ export class QuizManager {
 					[
 						generateParagraph(
 							this.questionManagers.length.toString(),
-							"text-2xl w-full m-0 my-0",
+							"text-2xl w-full m-0 my-0!",
 						),
 						generateParagraph(
 							"Questions",
-							"text-sm text-muted w-full m-0 my-0",
+							"text-sm text-muted w-full m-0 my-0!",
 						),
 					],
 				),
@@ -104,11 +104,11 @@ export class QuizManager {
 							Math.ceil(
 								this.questionManagers.length / 2,
 							).toString(),
-							"text-2xl w-full m-0 my-0",
+							"text-2xl w-full m-0 my-0!",
 						),
 						generateParagraph(
 							"Minutes",
-							"text-sm text-muted w-full m-0 my-0",
+							"text-sm text-muted w-full m-0 my-0!",
 						),
 					],
 				),
@@ -117,11 +117,11 @@ export class QuizManager {
 					[
 						generateDiv("flex items-center justify-center gap-1", [
 							generateTrophySVG("w-5 h-5 text-yellow-500"),
-							generateParagraph("N/A", "text-2xl m-0 my-0"),
+							generateParagraph("N/A", "text-2xl m-0 my-0!"),
 						]),
 						generateParagraph(
 							"Best Score",
-							"text-sm text-muted w-full m-0 my-0",
+							"text-sm text-muted w-full m-0 my-0!",
 						),
 					],
 				),

@@ -151,7 +151,7 @@ export default class SAManager implements QuestionManager {
 									isCorrect
 										? "Correct!"
 										: "Your answer was marked incorrect",
-									`m-0 my-0 ${isCorrect ? "text-green-600" : "text-amber-600"}`,
+									`m-0 my-0! ${isCorrect ? "text-green-600" : "text-amber-600"}`,
 								),
 								...(isCorrect ? [] : feedback),
 							],

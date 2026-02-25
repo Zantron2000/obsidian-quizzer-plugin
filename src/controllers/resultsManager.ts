@@ -55,7 +55,7 @@ export default class ResultsManager {
 						class: "w-12 h-12 mx-auto mb-4 text-accent-light rounded-full flex items-center justify-center",
 						children: [generateCheckSVG("w-12 h-12 text-accent")],
 					},
-					generateParagraph("Quiz Complete!", "text-3xl my-0 mb-2"),
+					generateParagraph("Quiz Complete!", "text-3xl my-0! mb-2"),
 					generateParagraph(
 						"Here are your results",
 						"text-muted my-2",
@@ -69,7 +69,7 @@ export default class ResultsManager {
 				children: [
 					generateParagraph(
 						`${Math.round((correctQuestions.filter(Boolean).length / correctQuestions.length) * 100)}%`,
-						"text-5xl my-0 mb-2 text-accent",
+						"text-5xl my-0! mb-2 text-accent",
 					),
 					{
 						tag: "div",
