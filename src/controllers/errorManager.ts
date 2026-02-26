@@ -318,7 +318,7 @@ export default class ErrorManager {
 										{
 											tag: "span",
 											class: "font-medium text-red-600",
-											text: "property: ",
+											text: "Validation Error: ",
 											children: [],
 										},
 										{
