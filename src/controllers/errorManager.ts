@@ -299,15 +299,17 @@ export default class ErrorManager {
 							tag: "div",
 							class: "flex-1",
 							children: [
-								generateParagraph(
-									error!.questionIndex == null
-										? "General Error"
-										: `Question ${error!.questionIndex + 1}`,
-									"text-sm text-red-600 mb-1",
-								),
+								generateDiv("flex h-6 items-center", [
+									generateParagraph(
+										error!.questionIndex == null
+											? "General Error"
+											: `Question ${error!.questionIndex + 1}`,
+										"text-sm text-red-600 my-0!",
+									),
+								]),
 								generateParagraph(
 									error!.path,
-									"text-xs font-mono text-muted mb-2 bg-secondary px-2 py-1 rounded inline-block",
+									"text-xs font-mono text-muted my-2! bg-secondary px-2 py-1 rounded inline-block",
 								),
 								{
 									tag: "div",

@@ -81,6 +81,9 @@
 .my-2 {
   margin-block: calc(var(--spacing) * 2);
 }
+.my-2\! {
+  margin-block: calc(var(--spacing) * 2) !important;
+}
 .mt-0 {
   margin-top: calc(var(--spacing) * 0);
 }
