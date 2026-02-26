@@ -6,6 +6,7 @@ import TFManager from "./tfManager";
 import SAManager from "./saManager";
 import generateParagraph from "view/html/generateParagraph";
 import generateListItem from "view/html/generateListItem";
+import generateDiv from "view/html/generateDiv";
 
 export default class ErrorManager {
 	private static quizzSchema = {
@@ -396,13 +397,15 @@ export default class ErrorManager {
 							{
 								tag: "div",
 								children: [
-									generateParagraph(
-										"Invalid Quiz Data",
-										"text-2xl mb-1",
-									),
+									generateDiv("h-12 flex items-center", [
+										generateParagraph(
+											"Invalid Quiz Data",
+											"text-2xl m-0 my-0!",
+										),
+									]),
 									generateParagraph(
 										`Your quiz configuration contains ${this.errors.length} validation error(s) that must be fixed before proceeding.`,
-										"text-sm text-muted",
+										"text-sm text-muted my-0!",
 									),
 								],
 							},
